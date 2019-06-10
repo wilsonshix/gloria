@@ -42,7 +42,7 @@ public class SearchPage extends CommonOnPage implements WebElementAction{
 
 
 	/*
-	 * @Entêtes
+	 * @Entï¿½tes
 	 */
 
 
@@ -50,7 +50,7 @@ public class SearchPage extends CommonOnPage implements WebElementAction{
 	 * @Corps de page
 	 */
 
-	//Libéllé de la recherche
+	//Libï¿½llï¿½ de la recherche
 	@FindBy(xpath="//*[@id='request_title']")
 	@CacheLookup
 	WebElement txt_searchTitle;
@@ -90,30 +90,30 @@ public class SearchPage extends CommonOnPage implements WebElementAction{
 	WebElement pageLink;
 
 
-	/*traiter le cas où le produit sélectionné n'est pas disponible 
+	/*traiter le cas oï¿½ le produit sï¿½lectionnï¿½ n'est pas disponible 
 	 *
 	 */
 
 
-	// traiter le cas où la recherche ne retourne rien __ déja commencé *
+	// traiter le cas oï¿½ la recherche ne retourne rien __ dï¿½ja commencï¿½ *
 
-	//	Aller à la page suivante  OK  + penser à améliorer avec la vérification de ne pas être à la fin
+	//	Aller Ã  la page suivante  OK  + penser Ã  amÃ©liorer avec la vÃ©rification de ne pas Ãªtre Ã  la fin
 	public void goToNexLink(){		
 		performingAction(ClickOnWebElement(driver, pageLink));		
 	}
 
-
+// RÃ©cupÃ©rer le titre de la recherche
 	public String getSearchTitle(WebElement txt_searchTitle){		
 		return txt_searchTitle.getText();
 	}
 
-	//Vérifier que le titre de la recherche est correcte
+	//VÃ©rifier que le titre de la recherche est correcte
 	public void isCorrectResultTitle(String search){		
-		String title= "Résultats pour “"+search+"”";	
+		String title= "RÃ©sultats pour :"+search+"!";	
 		Assert.assertEquals(txt_searchTitle.getText().toString().toLowerCase(), title.toLowerCase());
 	}
 
-	//Vérifier si la recherche retourne des résultats  KO
+	//VÃ©rifier si la recherche retourne des rÃ©sultats  KO
 	public boolean areArticlesPresent(){	
 		boolean display = driver.findElement(By.id("request_title")).isDisplayed();
 		return 	display;
@@ -122,14 +122,14 @@ public class SearchPage extends CommonOnPage implements WebElementAction{
 
 
 
-	//Sélectionner un article : aléatoirement
+	//SÃ©lectionner un article : alÃ©atoirement
 	public void clickOnRandomArticle(){ 
 		List<WebElement> items = articles_Nom; 		
 		int size = getArticleSize();
 		Random rand = new Random();
 		System.out.println("**********************************");
 
-		int number = rand.nextInt(size);  //0 à 31
+		int number = rand.nextInt(size);  //0 + 31
 		System.out.println("radom number :"+number);
 
 		int i = 0;
@@ -138,7 +138,7 @@ public class SearchPage extends CommonOnPage implements WebElementAction{
 			if(!(e.getText().isEmpty())){	
 				System.out.println("i: "+i+"  "+e.getText());
 				if(i==number){
-					System.out.println("l'heureux élu est : "+i+" :"+e.getText());
+					System.out.println("l'heureux Ã©lu est : "+i+" :"+e.getText());
 					performingAction(ClickOnWebElement(driver, e));	
 					break;
 				}
@@ -149,14 +149,14 @@ public class SearchPage extends CommonOnPage implements WebElementAction{
 
 
 
-	//Sélectionner un article en cliquant sur son image
+	//SÃ©lectionner un article en cliquant sur son image
 	public void clickOnImageArticle(){
 		performingAction(ClickOnWebElement(driver, article_img));
 	}
 
 
-	// Connaitre l'état de recherche d'un article bien défini : par son nom	                       
-	//Si trouvé => cliquer  Sinon goToNext
+	// Connaitre l'Ã©tat de recherche d'un article bien dÃ©fini : par son nom	                       
+	//Si trouvÃ© => cliquer  Sinon goToNext
 	public void clickOnSpecificArticle(String keyword){		
 		List<WebElement> items = articles_Nom; 
 		boolean rep = false;
@@ -179,7 +179,7 @@ public class SearchPage extends CommonOnPage implements WebElementAction{
 
 
 
-	// Retourner le nombre d'articles 
+	// Permet d'obtenir le nombre d'articles 
 	public int getArticleSize(){
 		List<WebElement> myElements = articles_Nom; 	
 		int i = 0;
@@ -193,10 +193,10 @@ public class SearchPage extends CommonOnPage implements WebElementAction{
 	}	
 
 
-	// Afficher tous les articles retournés par la recherche
+	// Permet d'afficher tous les articles trouvÃ©s par la recherche
 	public void displayAllArticles(){
 		
-		boolean bool = ElementIsPresent(driver, article_Nom); // <> articles_Nom     Demo pour éviter les objets non atteignables
+		boolean bool = isElementPresent(driver, article_Nom); // <> articles_Nom     Demo pour ï¿½viter les objets non atteignables
 		if(bool==true){
 			
 			List<WebElement> myElements = articles_Nom; 
@@ -214,17 +214,17 @@ public class SearchPage extends CommonOnPage implements WebElementAction{
 
 
 
-	//Sélectionner une des options de tri, en fonction de sa valeur 		
+	//SÃ©lectionner une des options de tri, en fonction de sa valeur 		
 	public void selectCBoxValue(String value){ 		
 		performingAction(selectValueOnCBox(driver, CBox_sorting, value));
 	}
 
-	//Sélectionner une des options de tri, de manière aléatoire	
+	//SÃ©lectionner une des options de tri, de maniÃ¨re alÃ©atoire	
 	public void selectRandomCBoxValue(){
 		performingAction(selectRandomValueOnCBox(driver, CBox_values)); 
 	}
 
-	//Récuperer toutes les options de tri, dans une liste	
+	//RÃ©cuperer toutes les options de tri, dans une liste	
 	public List<WebElement> getAllSortingValue(){
 		List<WebElement> myElements = driver.findElements(By.xpath("//*[@id='sort_by']/option"));
 		return myElements;
@@ -240,22 +240,12 @@ public class SearchPage extends CommonOnPage implements WebElementAction{
 	}
 
 
-	// Vérifier que l'élément est cliquable => page is loaded !
-	public boolean isAt() {    
-
-		boolean isClickable = WaitForWebElement(driver, article_Nom);
-		int i = 1;
-		while (isClickable == false && i < 4) {
-			isClickable = WaitForWebElement(driver, article_Nom);
-			System.out.println("page is loading ...");
-			i++;
-
-			if(isClickable == false && i==4) {
-				System.out.println("SearchPage was not successfully loaded");
-			}
-		}        
-		return isClickable;
+	// VÃ©rifier que l'Ã©lÃ©ment est cliquable => page is loaded !
+	public boolean isAt() {    		 
+		return isPageLoaded(driver, article_Nom, "SearchPage");
 	}
+	
+
 
 
 

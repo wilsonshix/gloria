@@ -30,24 +30,27 @@ public class LoginPage extends CommonOnPage implements WebElementAction{
 	@CacheLookup
 	WebElement txt_password;
 
-	@FindBy(how = How.XPATH, using = "/html/body/div[1]/div[3]/form/div[3]/button")	
+	@FindBy(how = How.XPATH, using = "//*[@id=\"form-identification\"]/div[3]/button")	
 	@CacheLookup
 	WebElement btn_Connexion;
 
-
+	
 
 	// Methods
 
+	// Renseigner le nom d'utilisateur
 	public void setUsername(String a){
 		System.out.println("Fill --- textBox -- txt_username");
 		performingAction(SendKeysOnWebElement(driver, txt_username, a));		
 	}
 
+	// Renseigner le mot de passe
 	public void setPassword(String a){
 		System.out.println("Fill --- textBox -- txt_password");
 		performingAction(SendKeysOnWebElement(driver, txt_password, a));		
 	}
 
+// Cliquer sur le bouton de connexion	
 	public void clickOnConnexion(){
 		System.out.println("Click --- button -- btn_Connexion");
 		performingAction(ClickOnWebElement(driver, btn_Connexion));		
@@ -55,25 +58,10 @@ public class LoginPage extends CommonOnPage implements WebElementAction{
 
 
 
-	// Vérifier que l'élément est cliquable => page is loaded !
-				public boolean isAt() {    
-			    	
-			        boolean isClickable = WaitForWebElement(driver, btn_Connexion);
-			        int i = 1;
-			        while (isClickable == false && i < 4) {
-			        	isClickable = WaitForWebElement(driver, btn_Connexion);
-			            System.out.println("page is loading ...");
-			            i++;
-			            
-			            if(isClickable == false && i==4) {
-			            	System.out.println("LoginPage was not successfully loaded");
-				        }
-			        }        
-			        
-			        return isClickable; 
+	// VÃ©rifier qu'on est bien sur la page
+				public boolean isAt() {    		 
+					return isPageLoaded(driver, txt_username, "LoginPage");
 				}
-
-
 
 	    
 

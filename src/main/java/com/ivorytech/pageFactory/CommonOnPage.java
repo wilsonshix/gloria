@@ -78,22 +78,22 @@ public class CommonOnPage implements WebElementAction{
 
 
 
-	//Saisir la recherche
+	//Permet de saisir la recherche
 	public void typeSearch(String v){
 		System.out.println("Fill --- textBox -- txt_searchBar");
 		performingAction(SendKeysOnWebElement(driver, txt_searchBar, v));
 	}
 
-	//Lancer la recherche
+	//Permet de lancer une recherche
 	public void clickOnSearch(){
 		System.out.println("Click --- button -- btn_search");
 		performingAction(ClickOnWebElement(driver, btn_search));
 	}
 	
 	
-	// V�rifier le statut de connexion
+	// Vérifier le statut de connexion
 	public void isConnected(){		
-		String statut= "CONNECT�(E)";	
+		String statut= "CONNECTE(E)";	
 		Assert.assertEquals(txt_connecte.getText().toString().toLowerCase(), statut.toLowerCase());
 	}
 	

@@ -20,11 +20,12 @@ import com.ivorytech.pageFactory.ProductPage;
 import com.ivorytech.pageFactory.SearchPage;
 import com.ivorytech.pageFactory.UserDetailsPage;
 
+
 public class dartyTest0 {
 	
 	DriverManager driverManager;
     WebDriver driver;
-    String browser = "Firefox";
+    String browser = "Chrome";
     String url = "https://www.darty.com";
     String search = "lenovo";
     
@@ -38,14 +39,16 @@ public class dartyTest0 {
 			System.setProperty("webdriver.chrome.driver","C:\\SeleniumGecko\\chromedriver.exe");
 			driver = new ChromeDriver();
 		}
+    	
+    	
 	}
 
     @BeforeMethod
     public void runTest(){
 		//maximize the browser 
-		driver.manage().window().maximize();  
+		//driver.manage().window().maximize();  
 		//if can't find the element with in 10 sec, throw exception  
-		driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS); 
+		driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS); 
 		driver.get(url);
 		driver.getTitle();
 	}
@@ -68,7 +71,7 @@ public class dartyTest0 {
     	System.out.println("HomePage was successfully loaded :"+driver.getTitle());    	    	    	
     	hp.goToLoginPage();
     	
-    	LoginPage lp = new LoginPage(driver);
+    	LoginPage lp = new LoginPage(driver); 
     	Assert.assertTrue(lp.isAt());
     	System.out.println("LoginPage was successfully loaded :"+driver.getTitle());
     	lp.setUsername("willdjako05@gmail.com");

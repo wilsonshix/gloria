@@ -24,13 +24,28 @@
     <artifactId>selenium-java</artifactId>
     <version>${selenium.version}</version>
 </dependency>
-  
+ 
   <dependency>
     <groupId>org.testng</groupId>
     <artifactId>testng</artifactId>
     <version>${testng.version}</version>
     <scope>test</scope>
 </dependency>
+
+<!-- Drivers des navigateurs -->
+<dependency>
+    <groupId>org.seleniumhq.selenium</groupId>
+    <artifactId>selenium-chrome-driver</artifactId>
+    <version>${selenium.version}</version>
+</dependency>
+<dependency>
+    <groupId>org.seleniumhq.selenium</groupId>
+    <artifactId>selenium-firefox-driver</artifactId>
+    <version>${selenium.version}</version>
+</dependency>
+
+
+
 
 <dependency>
     <groupId>org.apache.poi</groupId>

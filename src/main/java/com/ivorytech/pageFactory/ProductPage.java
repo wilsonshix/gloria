@@ -29,7 +29,7 @@ public class ProductPage extends CommonOnPage implements WebElementAction{
 	
 	
 	/*
-	 * @Entêtes
+	 * @Entï¿½tes
 	 */
 
 
@@ -44,12 +44,12 @@ public class ProductPage extends CommonOnPage implements WebElementAction{
 	@FindBy(xpath="//div/form/button[@class='ajout_panier_bouton btn-reset']")
 	WebElement btn_addToCard;
 
-	//Message Produit bien ajouté
+	//Message Produit bien ajoutï¿½
 	@FindBy(xpath="//*[@id='main']/div[1]/div[1]/p")
 	WebElement msg_productAdded;
 	
 
-	//Bouton accéder au panier
+	//Bouton accï¿½der au panier
 	@FindBy(xpath="//*[@id='main']/div[1]/div[1]/a")
 	WebElement btn_AccessToCart;
 	
@@ -63,7 +63,7 @@ public class ProductPage extends CommonOnPage implements WebElementAction{
 	@FindBy(xpath="//*[@id='kClose']")
 	WebElement btn_CloseAlert;
 
-	//POP IN qui apparait lorsqu'on clique sur "Accéder au panier"
+	//POP IN qui apparait lorsqu'on clique sur "Accï¿½der au panier"
 	@FindBy(xpath="//*[@id='kPopin']")
 	WebElement pop_up;
 
@@ -71,10 +71,10 @@ public class ProductPage extends CommonOnPage implements WebElementAction{
 
 
 	/*
-	 * @Méthodes
+	 * @MÃ©thodes
 	 */
 	
-	//Savoir si la garantie est proposée
+	//Savoir si la garantie est proposÃ©e
 	public void isGuaranteePresent(){		
 		//boolean rep = Assert.assertTrue(txt_guarantee.isDisplayed());
 	}
@@ -84,7 +84,7 @@ public class ProductPage extends CommonOnPage implements WebElementAction{
 	
 	
 
-	//Vérifier la présence du bouton Ajouter ***Autrement il n'est pas disponible
+	//VÃ©rifier la prÃ©sence du bouton Ajouter ***Autrement il n'est pas disponible
 	public boolean addToCardIsDisplayed(){
 		boolean rep = true;
 		if(btn_addToCard.isDisplayed()){
@@ -120,31 +120,31 @@ public class ProductPage extends CommonOnPage implements WebElementAction{
 	
 	
 
-	//Ajouter au panier
+	//Cliquer sur le bouton d'ajout au panier
 	public void clickOnAddToCart(){
 		performingAction(ClickOnWebElement(driver, btn_addToCard));
 
-		//Expérimentation de action tracing
+		//ExpÃ©rimentation de action tracing
 		System.out.println("Click btn Ajout au panier - OK");
 	}
 
 
-	//Vérifier que le produit a été bien ajouté au panier
+	//VÃ©rifier que le produit a Ã©tÃ© bien ajoutÃ© au panier
 	public void isCorrectResultTitle(){		
-		String title= "Votre produit a bien été ajouté au panier";	
+		String title= "Votre produit a bien ï¿½tï¿½ ajoutï¿½ au panier";	
 		Assert.assertEquals(msg_productAdded.getText().toString().toLowerCase(), title.toLowerCase());
 	}
 
-	//Accéder au panier
+	//Permet d'accÃ©der au panier
 	public void clickOnAccessToCart(){
 		performingAction(ClickOnWebElement(driver, btn_AccessToCart));
 		
-		//Expérimentation de action tracing
-		System.out.println("Click btn Accéder au panier - OK");
+		//Expï¿½rimentation de action tracing
+		System.out.println("Click btn Accï¿½der au panier - OK");
 		
 		}
 
-	//Accéder au panier avec gestion des alertes
+	//Permet d'accÃ©der au panier avec gestion des alertes
 	public void clickOnAccessToCart2(){
 
 		try {
@@ -161,18 +161,18 @@ public class ProductPage extends CommonOnPage implements WebElementAction{
 				//driver.switchTo().window(title);
 				driver.findElement(By.xpath("//*[@id='kClose']")).click();
 
-				System.out.println("le wé est visible tchê !");
+				System.out.println("le wï¿½ est visible tchï¿½ !");
 			}
 
 		} catch (TimeoutException ex) {
-			System.out.println("le wé n'est pas visible tchê !");
+			System.out.println("le wï¿½ n'est pas visible tchï¿½ !");
 		}
 
 	}
 
 
-	//Fermer la pop up qui s'affiche après avoir cliqué sur btn clickOnAccessToCart
-	//lorsque le pop up n'est pas présent = erreur
+	//Fermer la pop up qui s'affiche aprÃ¨s avoir cliquÃ© sur btn clickOnAccessToCart
+	//lorsque le pop up n'est pas prÃ©sent = erreur
 	public void clickOnCloseAlert(){
 		btn_CloseAlert.click();
 	}
@@ -180,25 +180,11 @@ public class ProductPage extends CommonOnPage implements WebElementAction{
 
 
 
+	// VÃ©rifier que l'Ã©lÃ©ment est cliquable => page is loaded !
+	public boolean isAt() {    		 
+		return isPageLoaded(driver, btn_addToCard, "ProductPage");
+	}
 
-
-	// Vérifier que l'élément est cliquable => page is loaded !
-			public boolean isAt() {    
-		    	
-		        boolean isClickable = WaitForWebElement(driver, btn_addToCard);
-		        int i = 1;
-		        while (isClickable == false && i < 4) {
-		        	isClickable = WaitForWebElement(driver, btn_addToCard);
-		            System.out.println("page is loading ...");
-		            i++;
-		            
-		            if(isClickable == false && i==4) {
-		            	System.out.println("ProductPage was not successfully loaded");
-			        }
-		        }        
-		        
-		        return isClickable;
-			}
 
 
 	

@@ -2,28 +2,31 @@
 <testng-results skipped="0" failed="1" ignored="0" total="1" passed="0">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="11462" started-at="2019-06-09T01:51:23Z" finished-at="2019-06-09T01:51:34Z">
+  <suite name="Default suite" duration-ms="340834" started-at="2019-06-10T02:15:16Z" finished-at="2019-06-10T02:20:57Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="11462" started-at="2019-06-09T01:51:23Z" finished-at="2019-06-09T01:51:34Z">
-      <class name="com.ivorytech.basics.googlePageTest">
-        <test-method status="PASS" signature="beforeClass()[pri:0, instance:com.ivorytech.basics.googlePageTest@14acaea5]" name="beforeClass" is-config="true" duration-ms="7688" started-at="2019-06-09T01:51:23Z" finished-at="2019-06-09T01:51:30Z">
+    <test name="Default test" duration-ms="340834" started-at="2019-06-10T02:15:16Z" finished-at="2019-06-10T02:20:57Z">
+      <class name="com.ivorytech.basics.dartyTest0">
+        <test-method status="PASS" signature="setBrowserConfig()[pri:0, instance:com.ivorytech.basics.dartyTest0@685cb137]" name="setBrowserConfig" is-config="true" duration-ms="9153" started-at="2019-06-10T02:15:16Z" finished-at="2019-06-10T02:15:26Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- beforeClass -->
-        <test-method status="FAIL" signature="verifySearchButton()[pri:0, instance:com.ivorytech.basics.googlePageTest@14acaea5]" name="verifySearchButton" duration-ms="2881" started-at="2019-06-09T01:51:30Z" finished-at="2019-06-09T01:51:33Z">
+        </test-method> <!-- setBrowserConfig -->
+        <test-method status="PASS" signature="runTest()[pri:0, instance:com.ivorytech.basics.dartyTest0@685cb137]" name="runTest" is-config="true" duration-ms="8443" started-at="2019-06-10T02:15:26Z" finished-at="2019-06-10T02:15:34Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runTest -->
+        <test-method status="FAIL" signature="launchTest()[pri:0, instance:com.ivorytech.basics.dartyTest0@685cb137]" name="launchTest" duration-ms="323002" started-at="2019-06-10T02:15:34Z" finished-at="2019-06-10T02:20:57Z">
           <exception class="java.lang.AssertionError">
             <message>
-              <![CDATA[Text not found! expected [Google Search] but found [Recherche Google]]]>
+              <![CDATA[expected [true] but found [false]]]>
             </message>
             <full-stacktrace>
-              <![CDATA[java.lang.AssertionError: Text not found! expected [Google Search] but found [Recherche Google]
+              <![CDATA[java.lang.AssertionError: expected [true] but found [false]
 at org.testng.Assert.fail(Assert.java:96)
 at org.testng.Assert.failNotEquals(Assert.java:776)
-at org.testng.Assert.assertEqualsImpl(Assert.java:137)
-at org.testng.Assert.assertEquals(Assert.java:118)
-at org.testng.Assert.assertEquals(Assert.java:453)
-at com.ivorytech.basics.googlePageTest.verifySearchButton(googlePageTest.java:54)
+at org.testng.Assert.assertTrue(Assert.java:44)
+at org.testng.Assert.assertTrue(Assert.java:54)
+at com.ivorytech.basics.dartyTest0.launchTest(dartyTest0.java:104)
 at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
 at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
@@ -54,12 +57,12 @@ at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
           </exception> <!-- java.lang.AssertionError -->
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- verifySearchButton -->
-        <test-method status="PASS" signature="afterClass()[pri:0, instance:com.ivorytech.basics.googlePageTest@14acaea5]" name="afterClass" is-config="true" duration-ms="840" started-at="2019-06-09T01:51:33Z" finished-at="2019-06-09T01:51:34Z">
+        </test-method> <!-- launchTest -->
+        <test-method status="PASS" signature="closeTest()[pri:0, instance:com.ivorytech.basics.dartyTest0@685cb137]" name="closeTest" is-config="true" duration-ms="0" started-at="2019-06-10T02:20:57Z" finished-at="2019-06-10T02:20:57Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- afterClass -->
-      </class> <!-- com.ivorytech.basics.googlePageTest -->
+        </test-method> <!-- closeTest -->
+      </class> <!-- com.ivorytech.basics.dartyTest0 -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

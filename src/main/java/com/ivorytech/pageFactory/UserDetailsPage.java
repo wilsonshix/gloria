@@ -37,23 +37,11 @@ public class UserDetailsPage extends CommonOnPage implements WebElementAction {
 	
 	
 	
-	// Vérifier que l'élément est cliquable => page is loaded !
-	public boolean isAt() {    
-
-		boolean isClickable = WaitForWebElement(driver, espace_client);
-		int i = 1;
-		while (isClickable == false && i < 4) {
-			isClickable = WaitForWebElement(driver, espace_client);
-			System.out.println("page is loading ...");
-			i++;
-
-			if(isClickable == false && i==4) {
-				System.out.println("UserDetailsPage was not successfully loaded");
-			}
-		}        
-
-		return isClickable;
+	// VÃ©rifier que l'Ã©lÃ©ment est cliquable => page is loaded !
+	public boolean isAt() {    		 
+		return isPageLoaded(driver, espace_client, "UserDetailsPage");
 	}
+	
 
 
 }

@@ -3,13 +3,14 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.ivorytech.basics.googlePageTest">
+      <class name="com.ivorytech.basics.dartyTest0">
         <methods>
-          <include name="beforeClass"/>
-          <include name="verifySearchButton"/>
-          <include name="afterClass"/>
+          <include name="launchTest"/>
+          <include name="closeTest"/>
+          <include name="setBrowserConfig"/>
+          <include name="runTest"/>
         </methods>
-      </class> <!-- com.ivorytech.basics.googlePageTest -->
+      </class> <!-- com.ivorytech.basics.dartyTest0 -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
