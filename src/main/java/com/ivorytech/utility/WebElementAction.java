@@ -1,5 +1,7 @@
 package com.ivorytech.utility;
 
+import static org.testng.Assert.assertEquals;
+
 import java.util.List;
 import java.util.Random;
 
@@ -12,88 +14,61 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+
+import com.ivorytech.pageFactory.LoginPage;
 
 public interface WebElementAction {
 
+/*
+	1- Chargement de la page
+	2- Vérification de la présence d'objet
+*/
 
 
-	//	Attendre le chargement complet d'un élément sur une page et Vérifier que cet élément soit localisé et cliquable
-	public default boolean WaitForWebElement(WebDriver driver, WebElement e) {
-		WebElement myDynamicElement = null;
-		try {
-			myDynamicElement = (new WebDriverWait(driver, 10))                    
-					.until(ExpectedConditions.elementToBeClickable(e)); // located and clickable (visible and enabled).
-			return true;
-		} catch (TimeoutException ex) {        	
-			return false;
-		} 
+	// #1  Renseigner une valeur dans un objet
+	public default void Saisir(WebDriver driver, WebElement e, String a){
+		System.out.println("Renseigner -- "+ e.getTagName()+" avec la valeur -- "+a.toString());
+		performingAction(SendKeysOnWebElement(driver, e, a.trim()));		
 	}
-	
-	
-	//	Attendre le chargement complet d'une page et verifier qu'un élément soit présent
-/*	public default boolean isWebElementPresent(WebDriver driver, WebElement e) {
-		WebElement myDynamicElement = null;
-		try {
-			myDynamicElement = (new WebDriverWait(driver, 10))                    
-					.until(ExpectedConditions.visibilityOfElementLocated((e)); // located and clickable (visible and enabled).
-			return true;
-		} catch (TimeoutException ex) {        	
-			return false;
-		} 
+
+
+	// #2  Cliquer sur un objet
+	public default void Cliquer(WebDriver driver, WebElement e){
+		System.out.println("Cliquer sur -- "+ e.getTagName());
+		performingAction(ClickOnWebElement(driver, e));		
 	}
-	*/
-	
-	
-//Attendre le chargement complet d'une page
-    public default void  WaitForWebPageLoaded(WebDriver driver) {
-        ExpectedCondition<Boolean> pageLoadCondition = new
-                ExpectedCondition<Boolean>() {
-                    public Boolean apply(WebDriver driver) {
-                        return ((JavascriptExecutor)driver).executeScript("return document.readyState").equals("complete");
-                    }
-                };
-        WebDriverWait wait = new WebDriverWait(driver, 30);
-        wait.until(pageLoadCondition);        
-    }
 
-    
-    
-	// Vérifier qu'une page soit complètement chargée
-	public default boolean isPageLoaded(WebDriver driver, WebElement element, String page) {    
-		WaitForWebPageLoaded(driver);
-		boolean isClickable = WaitForWebElement(driver, element);
-		int i = 0;
-		while (isClickable == false && i < 3) {
-			isClickable = WaitForWebElement(driver, element);
-			System.out.println(page +" is loading ...");
-			i++;
 
-			if(isClickable == false && i==3) {
-				System.out.println(page +" was not successfully loaded");
+	// #3 Atteindre une page
+	public default void AtteindrePage(WebDriver driver, WebElement e) { 
+		System.out.println("Accéder à la page ");
+		performingAction(ClickOnWebElement(driver, e));
+	}
+
+     // To improve
+	// #4 Vérifier le statut de connexion de l'utilisateur
+	public default void verifierConnexion(WebDriver driver, WebElement seConnecter, WebElement etreConnecte, WebElement seDeconnecter){	
+
+		boolean Connexion_isClickable = WaitForWebElement(driver, seConnecter);
+		boolean Connecte_isVisible = WaitForWebElement(driver, etreConnecte);  
+		boolean Deconnexion_isClickable = WaitForWebElement(driver, seDeconnecter);
+
+
+		if(Connexion_isClickable == true) {
+			if(Deconnexion_isClickable == false && Connecte_isVisible == false) {
+				System.out.println("Vous êtes deconnecté(e) !");
 			}
-		}        
-		//System.out.println(isClickable);  
-		return isClickable;
-	}
-    
-    
-    
-
-	//Permet de repeter une action sur un WebElement
-	public default void performingAction(boolean b) {    
-
-		boolean bool = false;
-		int i = 0;
-		while (bool == false && i < 2) { //repeter 2 fois
-			bool = b;
-			i++;
-		}        
-
+		}else {
+			if(Deconnexion_isClickable == true && Connecte_isVisible == true){
+			System.out.println("Vous êtes connecté(e) !");
+			}
+			}						
 	}
 
 
-
-
+	
+	
 	// Vérifier qu'un Element est (cliquable) présent => pour les getElement        // tous les objets cliquales
 	public default boolean isElementPresent(WebDriver driver, WebElement e) {    
 
@@ -110,12 +85,112 @@ public interface WebElementAction {
 		}        
 
 		return isClickable; 
+	}	
+	
+	
+	
+	
+	
+	// Vérifier et qu'on soit sur la bonne page (page soit complètement chargée)
+	/*
+	LoginPage lp = new LoginPage(driver); 
+	Assert.assertTrue(lp.isAt());
+	System.out.println("LoginPage was successfully loaded :"+driver.getTitle());
+	*/  
+	
+	// Mettre ces genres de méthodes comme statics
+	
+	// Charger une Page avant toute opération dessus
+	public default void ChargerPage(WebDriver driver, WebElement element, String page) {
+		boolean isLoaded = isPageLoaded(driver, element, page);
+		
+		if(isLoaded == true) {
+			System.out.println("La page "+ page +" a été chargée avec succès ! -- "+driver.getTitle());
+		}else {
+			System.out.println("La page "+ page +" n'a pas pu être chargée !");
+		}
+		
+	}
+	
+	
+	
+	
+	
+	
+	// Vérifier qu'une page soit complètement chargée + et qu'on soit sur la bonne page
+	public default boolean isPageLoaded(WebDriver driver, WebElement element, String page) {    
+		WaitForWebPageLoaded(driver);
+		boolean isClickable = WaitForWebElement(driver, element);
+		int i = 0;
+		while (isClickable == false && i < 3) {
+			isClickable = WaitForWebElement(driver, element);
+			System.out.println("La page "+ page +" est en cours de chargement ...");
+			i++;
+
+		/*	if(isClickable == false && i==3) {
+				System.out.println("La page "+ page +" n'a pas pu être chargée");
+			}
+		*/
+		}        		
+		return isClickable;
+	}
+	
+	
+
+	
+
+	//Attendre le chargement complet d'une page
+	public default void  WaitForWebPageLoaded(WebDriver driver) {
+		ExpectedCondition<Boolean> pageLoadCondition = new
+				ExpectedCondition<Boolean>() {
+			public Boolean apply(WebDriver driver) {
+				return ((JavascriptExecutor)driver).executeScript("return document.readyState").equals("complete");
+			}
+		};
+		WebDriverWait wait = new WebDriverWait(driver, 30); // Attendre 30 secondes à chaque fois
+		wait.until(pageLoadCondition);        
+	}
+	
+	
+	
+
+	//	Attendre le chargement complet d'un élément sur une page et Vérifier que cet élément soit localisé et cliquable
+	public default boolean WaitForWebElement(WebDriver driver, WebElement e) {
+		WebElement myDynamicElement = null;
+		try {
+			myDynamicElement = (new WebDriverWait(driver, 10))           // Attendre 10 secondes             
+					.until(ExpectedConditions.elementToBeClickable(e)); // located and clickable (visible and enabled).
+			return true;
+		} catch (TimeoutException ex) {        	
+			return false;
+		} 
 	}
 
 
-	
+
+
+
+	//Permet de repeter une action sur un WebElement
+	public default void performingAction(boolean b) {    
+
+		boolean bool = false;
+		int i = 0;
+		while (bool == false && i < 2) { //repeter 2 fois
+			bool = b;
+			i++;
+		}        
+
+	}
+
+
+
+
+
+
+
+
 	// Vérifier qu'un Element est présent (objet non cliquable)       // tous les objets types : texte, image,... sans liens
-	
+
 	/*public default boolean ElementIsPresent(WebDriver driver, WebElement e) {    
 
 		boolean isClickable = WaitForWebElement(driver, e);
@@ -132,10 +207,10 @@ public interface WebElementAction {
 
 		return isClickable; 
 	}*/
-	
-	
-	
-	
+
+
+
+
 
 
 
@@ -205,7 +280,7 @@ public interface WebElementAction {
 				System.out.println(" StaleElementReferenceException");	//A commenter
 				return true;
 
-			} else if(!(ex.getMessage()==null)){  // Add lines to avoid  NotClickableException
+			} else if(!(ex.getMessage() == null)){  // Add lines to avoid  NotClickableException
 
 				System.out.println(ex.getMessage());
 				return false;
@@ -217,7 +292,7 @@ public interface WebElementAction {
 
 
 
-//Permet de sélectionner une valeur précise dans un ménu déroulant : ComboBox
+	//Permet de sélectionner une valeur précise dans un ménu déroulant : ComboBox
 	public default boolean selectValueOnCBox(WebDriver driver, WebElement e, String v){  
 
 		try{
@@ -244,7 +319,7 @@ public interface WebElementAction {
 
 
 
-//Permet de sélectionner une valeur aléatoire dans un ménu déroulant
+	//Permet de sélectionner une valeur aléatoire dans un ménu déroulant
 	public default boolean selectRandomValueOnCBox(WebDriver driver, List<WebElement> list){  
 
 		try{
@@ -267,14 +342,14 @@ public interface WebElementAction {
 
 
 
-// Vérifier qu'un élément à été trouvé lors d'une recherche parmis plusieurs autres éléments
+	// Vérifier qu'un élément à été trouvé lors d'une recherche parmis plusieurs autres éléments
 	public default boolean ArticleFound(WebDriver driver, WebElement e, String p) {
 
 		if(!(e.getText().isEmpty())){	
 			System.out.println("i:"+e.getText());
 			if(e.getText().equalsIgnoreCase(p)){
-				System.out.print("l'heureux �lu est :"+e.getText());
-				System.out.println(" VS   produit recherch� : "+p);				
+				System.out.print("l'heureux élu est :"+e.getText());
+				System.out.println(" VS   produit recherché : "+p);				
 				performingAction(ClickOnWebElement(driver, e));	
 				return true;				
 			}

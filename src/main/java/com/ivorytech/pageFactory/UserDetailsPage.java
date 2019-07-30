@@ -22,9 +22,12 @@ public class UserDetailsPage extends CommonOnPage implements WebElementAction {
 	//Objects
 
 	@FindBy(xpath="//*[@id='main']/div[1]/div[1]/h1/u")
-	WebElement espace_client;
+	public WebElement espace_client;
 
 
+	@FindBy(xpath="//span[contains(text(), 'Modifier']")
+	public WebElement lnk_Modifier_Userdetails;
+	
 	
 	
 	

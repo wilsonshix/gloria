@@ -22,27 +22,29 @@ public class LoginPage extends CommonOnPage implements WebElementAction{
 	//Objects
 
 	
-	@FindBy(xpath="//*[@id='login']")		
-	@CacheLookup
-	WebElement txt_username;
+	@FindBy(xpath="//*[@id='login']") 
+	@CacheLookup 
+	public WebElement txt_username;  // public afin d'être vu dans la classe de test
 
-	@FindBy(xpath="//*[@id='password']")	
-	@CacheLookup
-	WebElement txt_password;
+	@FindBy(xpath="//*[@id='password']") 
+	@CacheLookup	
+	public WebElement txt_password;
 
 	@FindBy(how = How.XPATH, using = "//*[@id=\"form-identification\"]/div[3]/button")	
-	@CacheLookup
-	WebElement btn_Connexion;
+	@CacheLookup 
+	public WebElement btn_Connexion;
 
 	
 
-	// Methods
-
+	// Methods  à généraliser OK  : plus besoin ici
+	/*
 	// Renseigner le nom d'utilisateur
 	public void setUsername(String a){
 		System.out.println("Fill --- textBox -- txt_username");
 		performingAction(SendKeysOnWebElement(driver, txt_username, a));		
-	}
+	} 
+	
+	
 
 	// Renseigner le mot de passe
 	public void setPassword(String a){
@@ -56,12 +58,13 @@ public class LoginPage extends CommonOnPage implements WebElementAction{
 		performingAction(ClickOnWebElement(driver, btn_Connexion));		
 	}
 
+*/
 
-
+	// Créer un macther pour tous les noms des pages
 	// Vérifier qu'on est bien sur la page
-				public boolean isAt() {    		 
-					return isPageLoaded(driver, txt_username, "LoginPage");
-				}
+	public boolean isAt() {    		 
+		return isPageLoaded(driver, txt_username, "LoginPage");
+	}
 
 	    
 

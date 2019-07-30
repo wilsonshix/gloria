@@ -38,8 +38,8 @@ public class cartWithManyArticles {
 
 
 
-			sd.typeSearch(search);
-			sd.clickOnSearch();
+	    	sd.Saisir(driver, sd.txt_searchBar,search);
+	    	sd.Cliquer(driver, sd.btn_search);
 
 
 			//sd.isCorrectResultTitle(search);

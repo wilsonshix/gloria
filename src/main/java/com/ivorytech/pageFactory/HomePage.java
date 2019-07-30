@@ -27,17 +27,13 @@ public class HomePage extends CommonOnPage implements WebElementAction{
 
 
 
-	// Methods
+	// Methods à généraliser
 	
-	
-	
-	
-	
-	
+		  	
 //Atteindre la page de connexion
 	public void goToLoginPage() { 
 		System.out.println("Click on button Se connecter");
-		performingAction(ClickOnWebElement(driver, lnk_Seconnecter));
+		performingAction(ClickOnWebElement(driver, lnk_PageDeConnexion));
 	}
 
 
@@ -45,7 +41,7 @@ public class HomePage extends CommonOnPage implements WebElementAction{
 
 	// Vérifier qu'on est bien sur la page 
 	public boolean isAt() {    		 
-		return isPageLoaded(driver, lnk_Seconnecter, "HomePage");
+		return isPageLoaded(driver, lnk_PageDeConnexion, "HomePage");
 	}
 	
 

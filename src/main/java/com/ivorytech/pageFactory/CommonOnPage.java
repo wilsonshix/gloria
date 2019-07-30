@@ -22,10 +22,35 @@ public class CommonOnPage implements WebElementAction{
 	 * @Ent�tes
 	 */
 
-	//Logo
+	
+	
+
+// MENU HORIZONTAL
+	
+ 
+ //SOLDES
+	@FindBy(xpath = "//*[@id=\"main-tab-id-1\"]/a")	
+	@CacheLookup
+	public WebElement Menu_soldes;
+	
+ //BONS PLANS
+	@FindBy(xpath = "//*[@id=\"main-tab-id-2\"]/a")	
+	@CacheLookup
+	public WebElement Menu_bons_plans;
+	
+ //CUISINES SUR MESURES
+	@FindBy(xpath = "//*[@id=\"main-tab-id-3\"]/a")	
+	@CacheLookup
+	public WebElement Menu_cuisines_sur_mesures;
+	
+	
+
+	
+	
+ //PAGE D'ACCUEIL
 	@FindBy(xpath = "//*[@id='logo']")	
 	@CacheLookup
-	public WebElement logo;
+	public WebElement img_LogoPageAccueil;
 
 	//Barre de recherche
 	@FindBy(xpath ="//*[@id='dartyCom_searchfield_xxl']")
@@ -37,14 +62,13 @@ public class CommonOnPage implements WebElementAction{
 	@CacheLookup
 	public WebElement btn_search;
 
-	//Lien de connexion
+ //PAGE DE CONNEXION
 	@FindBy(xpath="//a[@id='h_xxl_login_lien']")
 	@CacheLookup
-	public WebElement lnk_Seconnecter;
+	public WebElement lnk_PageDeConnexion;
+	
 
-	//Etat_connect�
-	@FindBy(xpath="//span[contains(text(), 'CONNECTE(E)']")
-	public WebElement txt_connecte;
+
 	
 	/*
 	 * //Etat_connect�
@@ -56,6 +80,25 @@ public class CommonOnPage implements WebElementAction{
 
 	//*[@id="h_xxl_login_lien"]/span
 
+
+
+
+	// MENU CLIENT
+	
+	//CONNEXION
+	@FindBy(xpath="//a[contains(text(), 'Se connecter']")
+	public WebElement lnk_connexion;
+	
+	//ETRE CONNECTE(E)
+	@FindBy(xpath="//span[contains(text(), 'CONNECTE(E)']")
+	public WebElement txt_connecte;
+	
+	//DECONNEXION
+	@FindBy(xpath="//a[@class='signout']")
+	//*[@id="h_xxl_login_loggedin_popin"]/a[4]
+	//*[@id="h_xxl_login_loggedin_popin"]/a[4]
+	public WebElement lnk_deconnexion;
+	
 	//Mes_Listes
 	@FindBy(xpath="//*[@id='h_xxl_wishlist_lien']")
 	@CacheLookup
@@ -65,14 +108,19 @@ public class CommonOnPage implements WebElementAction{
 	@FindBy(xpath="//*[@id='h_xxl_panier_lien']")
 	@CacheLookup
 	public WebElement lnk_panier; 
+	
+	
+	
+	
+	
+	
 
-
-
-
+/*  Refactor OK
+ * 
 	//Aller sur la page d'accueil
 	public void clickOnLogo(){
 		System.out.println("Click --- Image -- logo");
-		performingAction(ClickOnWebElement(driver, logo));
+		performingAction(ClickOnWebElement(driver, img_LogoPageAccueil));
 
 	}
 
@@ -89,6 +137,7 @@ public class CommonOnPage implements WebElementAction{
 		System.out.println("Click --- button -- btn_search");
 		performingAction(ClickOnWebElement(driver, btn_search));
 	}
+
 	
 	
 	// Vérifier le statut de connexion
@@ -97,6 +146,7 @@ public class CommonOnPage implements WebElementAction{
 		Assert.assertEquals(txt_connecte.getText().toString().toLowerCase(), statut.toLowerCase());
 	}
 	
+	*/
 	
 /*	
 	//Se connecter
@@ -143,6 +193,18 @@ public class CommonOnPage implements WebElementAction{
 	/*
 	 * Ent�tes
 ................................................................
+
+// MENU HORIZONTAL
+ 
+ //SOLDES
+ 
+ //BONS PLANS
+ 
+ //CUISINES SUR MESURES
+
+
+
+
 
 
 

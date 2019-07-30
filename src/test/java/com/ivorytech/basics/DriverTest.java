@@ -82,8 +82,8 @@ public class DriverTest {
 
 		HomePage hp = new HomePage(driver);
 
-		hp.typeSearch(search);
-    	hp.clickOnSearch();
+    	hp.Saisir(driver, hp.txt_searchBar,search);
+    	hp.Cliquer(driver, hp.btn_search);
     	
 		SearchPage sp = new SearchPage(driver);
 		Assert.assertTrue(sp.isAt());

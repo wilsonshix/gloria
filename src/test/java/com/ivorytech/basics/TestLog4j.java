@@ -69,9 +69,9 @@ public class TestLog4j {
     	LoginPage lp = new LoginPage(driver);
     	Assert.assertTrue(lp.isAt());
     	System.out.println("LoginPage was successfully loaded :"+driver.getTitle());
-    	lp.setUsername("willdjako05@gmail.com");
-    	lp.setPassword("Alexandrine1");
-    	lp.clickOnConnexion();
+    	lp.Saisir(driver, lp.txt_username, "willdjako05@gmail.com");
+    	lp.Saisir(driver, lp.txt_password, "Alexandrine1");
+    	lp.Cliquer(driver, lp.btn_Connexion);
 
     	    	
     	    	

@@ -68,29 +68,30 @@ public class dartyTest0 {
     	 	
     	HomePage hp = new HomePage(driver);
     	Assert.assertTrue(hp.isAt());
+    	//Assert.assertTrue(hp.isAt(driver,hp.lnk_Seconnecter,"HomePage"));
     	System.out.println("HomePage was successfully loaded :"+driver.getTitle());    	    	    	
     	hp.goToLoginPage();
     	
     	LoginPage lp = new LoginPage(driver); 
     	Assert.assertTrue(lp.isAt());
     	System.out.println("LoginPage was successfully loaded :"+driver.getTitle());
-    	lp.setUsername("willdjako05@gmail.com");
-    	lp.setPassword("Alexandrine1");
-    	lp.clickOnConnexion();
+    	lp.Saisir(driver, lp.txt_username, "willdjako05@gmail.com");
+    	lp.Saisir(driver, lp.txt_password, "Alexandrine1");
+    	lp.Cliquer(driver, lp.btn_Connexion);
     	
     	UserDetailsPage up = new UserDetailsPage(driver);
     	Assert.assertTrue(up.isAt());
     	System.out.println("UserDetailsPage was successfully loaded :"+driver.getTitle());
     	
     	//go to HomePage
-    	up.clickOnLogo();
+    	up.AtteindrePage(driver,up.img_LogoPageAccueil);
     	
     	//Assert.assertTrue(hp.isAt());
     	System.out.println("HomePage was successfully loaded :"+driver.getTitle());
     	
     	//faire une recherche d'article
-    	hp.typeSearch(search);
-    	hp.clickOnSearch();
+    	hp.Saisir(driver, hp.txt_searchBar,search);
+    	hp.Cliquer(driver, hp.btn_search);
     	
     	SearchPage sp = new SearchPage(driver);
     	Assert.assertTrue(sp.isAt());

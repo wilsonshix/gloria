@@ -1,7 +1,11 @@
 package com.ivorytech.utility;
 
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Iterator;
 
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
@@ -51,7 +55,6 @@ public class ExcelUtils {
 		try{
 
 			Cell = ExcelWSheet.getRow(RowNum).getCell(ColNum);
-
 			String CellData = Cell.getStringCellValue();
 
 			return CellData;
@@ -141,4 +144,82 @@ public class ExcelUtils {
 
 
 	}
+	
+	
+
+    public static void reader(String Path,int SheetNum) {
+
+        try {
+        
+            FileInputStream excelFile = new FileInputStream(Path);
+            Workbook workbook = new XSSFWorkbook(excelFile);
+            Sheet datatypeSheet = workbook.getSheetAt(SheetNum);
+            Iterator<Row> iterator = datatypeSheet.iterator();
+
+            while (iterator.hasNext()) {
+
+                Row currentRow = iterator.next();
+                Iterator<Cell> cellIterator = currentRow.iterator();
+
+                while (cellIterator.hasNext()) {
+
+                    Cell currentCell = cellIterator.next();
+                    //getCellTypeEnum shown as deprecated for version 3.15
+                    //getCellTypeEnum ill be renamed to getCellType starting from version 4.0
+                    if (currentCell.getCellType() == CellType.STRING) {
+                        System.out.print(currentCell.getStringCellValue() + "--");
+                    } else if (currentCell.getCellType() == CellType.NUMERIC) {
+                        System.out.print(currentCell.getNumericCellValue() + "--");
+                    }else if (currentCell.getCellType() == CellType.BLANK) {
+                        System.out.print("||");
+                    }
+
+                }
+                System.out.println();
+
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+    
+    
+    
+    
+    
+    public static void reader2(String Path,int SheetNum) {
+
+           
+             
+			try {
+				FileInputStream	file = new FileInputStream(Path);
+            XSSFWorkbook workbook = new XSSFWorkbook(file);
+            XSSFSheet sheet = workbook.getSheetAt(0);
+            Iterator<Row> rowIterator = sheet.iterator();
+
+            while (rowIterator.hasNext()) {
+              Row row = rowIterator.next();
+              Cell cell0 = row.getCell(0);
+              if (cell0 != null) {
+                System.out.println("First Column Data : "+cell0.getStringCellValue());
+              }
+              Cell cell1 = row.getCell(1);
+              if (cell1 != null) System.out.println("Second Column Data : "+cell1.getStringCellValue());
+            }
+
+			}  catch (FileNotFoundException e) {
+	            e.printStackTrace();
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+    
+    }
+    
+    
 }
+	
+	
+
