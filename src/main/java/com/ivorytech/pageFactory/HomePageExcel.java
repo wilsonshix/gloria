@@ -50,23 +50,7 @@ public class HomePageExcel extends CommonOnPage implements WebElementAction{
 	
 	// Methods
 
-	// Renseigner le nom d'utilisateur
-	public void setUsername(String a){
-		System.out.println("Fill --- textBox -- txt_username");
-		performingAction(SendKeysOnWebElement(driver, txt_username, a));		
-	}
 
-	// Renseigner le mot de passe
-	public void setPassword(String a){
-		System.out.println("Fill --- textBox -- txt_password");
-		performingAction(SendKeysOnWebElement(driver, txt_password, a));		
-	}
-
-// Cliquer sur le bouton de connexion	
-	public void clickOnConnexion(){
-		System.out.println("Click --- button -- btn_Connexion");
-		performingAction(ClickOnWebElement(driver, btn_Connexion));		
-	}
 	
 
 }

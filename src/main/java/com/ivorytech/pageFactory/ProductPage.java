@@ -122,7 +122,7 @@ public class ProductPage extends CommonOnPage implements WebElementAction{
 
 	//Cliquer sur le bouton d'ajout au panier
 	public void clickOnAddToCart(){
-		performingAction(ClickOnWebElement(driver, btn_addToCard));
+		performingClickOnWebElement(driver, btn_addToCard);
 
 		//Expérimentation de action tracing
 		System.out.println("Click btn Ajout au panier - OK");
@@ -137,7 +137,7 @@ public class ProductPage extends CommonOnPage implements WebElementAction{
 
 	//Permet d'accéder au panier
 	public void clickOnAccessToCart(){
-		performingAction(ClickOnWebElement(driver, btn_AccessToCart));
+		performingClickOnWebElement(driver, btn_AccessToCart);
 		
 		//Exp�rimentation de action tracing
 		System.out.println("Click btn Acc�der au panier - OK");

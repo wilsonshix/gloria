@@ -29,21 +29,21 @@ public interface WebElementAction {
 	// #1  Renseigner une valeur dans un objet
 	public default void Saisir(WebDriver driver, WebElement e, String a){
 		System.out.println("Renseigner -- "+ e.getTagName()+" avec la valeur -- "+a.toString());
-		performingAction(SendKeysOnWebElement(driver, e, a.trim()));		
+		performingSendKeysOnWebElement(driver, e, a.trim());		
 	}
 
 
 	// #2  Cliquer sur un objet
 	public default void Cliquer(WebDriver driver, WebElement e){
 		System.out.println("Cliquer sur -- "+ e.getTagName());
-		performingAction(ClickOnWebElement(driver, e));		
+		performingClickOnWebElement(driver, e);		
 	}
 
 
 	// #3 Atteindre une page
-	public default void AtteindrePage(WebDriver driver, WebElement e) { 
+	public default void AtteindrePage(WebDriver driver, WebElement e){ 
 		System.out.println("Accéder à la page ");
-		performingAction(ClickOnWebElement(driver, e));
+		performingClickOnWebElement(driver, e);
 	}
 
      // To improve
@@ -167,49 +167,42 @@ public interface WebElementAction {
 	}
 
 
+	
+	
+	
+	
+	
+	//Permet de repeter une action de click sur un WebElement
+		public default void performingClickOnWebElement(WebDriver driver, WebElement e) {  
+			
+			boolean bool = ClickOnWebElement(driver, e);
+			System.out.println("Entrée dans performingAction  - avant la boucle While - valeur initiale de b ="+bool);
+			
+			int i = 0;
+			while (bool == false && i < 2) { //repeter 2 fois      
+				
+				bool = ClickOnWebElement(driver, e);
+				System.out.println("performingAction n°"+i+" - dans la boucle While - valeur avant incrémentation de b ="+bool);
+				i++;
+			}   
+		}
 
 
-
-	//Permet de repeter une action sur un WebElement
-	public default void performingAction(boolean b) {    
-
-		boolean bool = false;
-		int i = 0;
-		while (bool == false && i < 2) { //repeter 2 fois
-			bool = b;
-			i++;
-		}        
-
-	}
-
-
-
-
-
-
-
-
-	// Vérifier qu'un Element est présent (objet non cliquable)       // tous les objets types : texte, image,... sans liens
-
-	/*public default boolean ElementIsPresent(WebDriver driver, WebElement e) {    
-
-		boolean isClickable = WaitForWebElement(driver, e);
-		int i = 1;
-		while (isClickable == false && i < 4) {
-			isClickable = WaitForWebElement(driver, e);
-			System.out.println("Tentative n°"+i+" de recherche de l'objet "+e.getText());
-			i++;
-
-			if(isClickable == false && i==4) {
-				System.out.println("L'objet n'a pas été retrouvé : "+e.getText());
-			}
-		}        
-
-		return isClickable; 
-	}*/
-
-
-
+		
+	//Permet de repeter une action d'écrire dans un WebElement
+		public default void performingSendKeysOnWebElement(WebDriver driver, WebElement e, String v) {  
+			
+			boolean bool = SendKeysOnWebElement(driver, e, v);
+			System.out.println("Entrée dans performingAction  - avant la boucle While - valeur initiale de b ="+bool);
+			
+			int i = 0;
+			while (bool == false && i < 2) { //repeter 2 fois      
+				
+				bool = SendKeysOnWebElement(driver, e, v);
+				System.out.println("performingAction n°"+i+" - dans la boucle While - valeur avant incrémentation de b ="+bool);
+				i++;
+			}   
+		}
 
 
 
@@ -350,12 +343,36 @@ public interface WebElementAction {
 			if(e.getText().equalsIgnoreCase(p)){
 				System.out.print("l'heureux élu est :"+e.getText());
 				System.out.println(" VS   produit recherché : "+p);				
-				performingAction(ClickOnWebElement(driver, e));	
+				performingClickOnWebElement(driver, e);	
 				return true;				
 			}
 		}
 		return false;
 	}
+	
+	
+	
+	
+
+
+	// Vérifier qu'un Element est présent (objet non cliquable)       // tous les objets types : texte, image,... sans liens
+
+	/*public default boolean ElementIsPresent(WebDriver driver, WebElement e) {    
+
+		boolean isClickable = WaitForWebElement(driver, e);
+		int i = 1;
+		while (isClickable == false && i < 4) {
+			isClickable = WaitForWebElement(driver, e);
+			System.out.println("Tentative n°"+i+" de recherche de l'objet "+e.getText());
+			i++;
+
+			if(isClickable == false && i==4) {
+				System.out.println("L'objet n'a pas été retrouvé : "+e.getText());
+			}
+		}        
+
+		return isClickable; 
+	}*/
 
 
 }

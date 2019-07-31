@@ -99,7 +99,7 @@ public class SearchPage extends CommonOnPage implements WebElementAction{
 
 	//	Aller à la page suivante  OK  + penser à améliorer avec la vérification de ne pas être à la fin
 	public void goToNexLink(){		
-		performingAction(ClickOnWebElement(driver, pageLink));		
+		performingClickOnWebElement(driver, pageLink);		
 	}
 
 // Récupérer le titre de la recherche
@@ -139,7 +139,7 @@ public class SearchPage extends CommonOnPage implements WebElementAction{
 				System.out.println("i: "+i+"  "+e.getText());
 				if(i==number){
 					System.out.println("l'heureux élu est : "+i+" :"+e.getText());
-					performingAction(ClickOnWebElement(driver, e));	
+					performingClickOnWebElement(driver, e);	
 					break;
 				}
 				i++;
@@ -151,7 +151,7 @@ public class SearchPage extends CommonOnPage implements WebElementAction{
 
 	//Sélectionner un article en cliquant sur son image
 	public void clickOnImageArticle(){
-		performingAction(ClickOnWebElement(driver, article_img));
+		performingClickOnWebElement(driver, article_img);
 	}
 
 
@@ -216,12 +216,12 @@ public class SearchPage extends CommonOnPage implements WebElementAction{
 
 	//Sélectionner une des options de tri, en fonction de sa valeur 		
 	public void selectCBoxValue(String value){ 		
-		performingAction(selectValueOnCBox(driver, CBox_sorting, value));
+	//	performingAction(selectValueOnCBox(driver, CBox_sorting, value));  				A corriger
 	}
 
 	//Sélectionner une des options de tri, de manière aléatoire	
 	public void selectRandomCBoxValue(){
-		performingAction(selectRandomValueOnCBox(driver, CBox_values)); 
+	//	performingAction(selectRandomValueOnCBox(driver, CBox_values));      			A corriger - Refactorer
 	}
 
 	//Récuperer toutes les options de tri, dans une liste	

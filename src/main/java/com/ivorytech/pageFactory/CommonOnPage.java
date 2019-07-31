@@ -65,7 +65,7 @@ public class CommonOnPage implements WebElementAction{
  //PAGE DE CONNEXION
 	@FindBy(xpath="//a[@id='h_xxl_login_lien']")
 	@CacheLookup
-	public WebElement lnk_PageDeConnexion;
+	public WebElement lnk_PageConnexion;
 	
 
 
@@ -245,7 +245,7 @@ css=<HTML tag><:><contains><(text)>
 
 ............................................................................
 
-D�coupage
+Decoupage
 
 amazon.createUser(user, paymentInfo, shippingInfo)
 amazon.authenticate(username, password)

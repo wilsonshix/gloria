@@ -58,7 +58,7 @@ public class dartyKeywordsTest {
         //lp.Saisir(driver, lp.txt_username, sValue1);
     	
     	lp.Saisir(driver, lp.txt_username, "willdjako05@gmail.com");
-    	lp.Saisir(driver, lp.txt_password, "Alexandrine2");
+    	lp.Saisir(driver, lp.txt_password, "Alexandrine1");
     	lp.Cliquer(driver, lp.btn_Connexion);
     	lp.verifierConnexion(driver, lp.lnk_connexion, lp.txt_connecte, lp.lnk_deconnexion);
 
