@@ -44,15 +44,15 @@ public class cartWithManyArticles {
 
 			//sd.isCorrectResultTitle(search);
 
-			sd.displayAllArticles();
+	    	sd.displayAllArticles(driver, sd.lst_Noms_Articles, sd.txt_Nom_Article);
 
-			sd.displayAllSortingValue(); 
-			sd.selectRandomCBoxValue();  
+			sd.displayAllSortingValue(driver, sd.lst_Noms_Articles); 
+			sd.selectRandomCBoxValue(driver, sd.Lst_CBoxValues);  
 
-			sd.clickOnRandomArticle();
+			sd.clickOnRandomArticle(driver, sd.lst_Noms_Articles);
 
 
-			pp.clickOnAddToCart();		
+			pp.Cliquer(driver, pp.btn_addToCard);		
 			//pp.isCorrectResultTitle();
 
 			i++;
@@ -60,7 +60,7 @@ public class cartWithManyArticles {
 		}while (i<3);
 
 
-		pp.clickOnAccessToCart();
+		pp.clickOnAccessToCart(driver, pp.btn_AccessToCart);
 
 
 

@@ -46,7 +46,7 @@ public class searchArticleOnAllPage {
 				break;
 			}
 			if(x==false){
-				sp.goToNexLink();
+				sp.Cliquer(driver, sp.lnk_PageSuivante);;
 			}
 			rep=x;
 		}

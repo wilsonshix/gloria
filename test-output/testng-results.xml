@@ -2,20 +2,20 @@
 <testng-results skipped="0" failed="1" ignored="0" total="1" passed="0">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="340834" started-at="2019-06-10T02:15:16Z" finished-at="2019-06-10T02:20:57Z">
+  <suite name="Default suite" duration-ms="389488" started-at="2019-07-31T14:16:50Z" finished-at="2019-07-31T14:23:19Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="340834" started-at="2019-06-10T02:15:16Z" finished-at="2019-06-10T02:20:57Z">
+    <test name="Default test" duration-ms="389488" started-at="2019-07-31T14:16:50Z" finished-at="2019-07-31T14:23:19Z">
       <class name="com.ivorytech.basics.dartyTest0">
-        <test-method status="PASS" signature="setBrowserConfig()[pri:0, instance:com.ivorytech.basics.dartyTest0@685cb137]" name="setBrowserConfig" is-config="true" duration-ms="9153" started-at="2019-06-10T02:15:16Z" finished-at="2019-06-10T02:15:26Z">
+        <test-method status="PASS" signature="setBrowserConfig()[pri:0, instance:com.ivorytech.basics.dartyTest0@685cb137]" name="setBrowserConfig" is-config="true" duration-ms="6507" started-at="2019-07-31T14:16:50Z" finished-at="2019-07-31T14:16:56Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setBrowserConfig -->
-        <test-method status="PASS" signature="runTest()[pri:0, instance:com.ivorytech.basics.dartyTest0@685cb137]" name="runTest" is-config="true" duration-ms="8443" started-at="2019-06-10T02:15:26Z" finished-at="2019-06-10T02:15:34Z">
+        <test-method status="PASS" signature="runTest()[pri:0, instance:com.ivorytech.basics.dartyTest0@685cb137]" name="runTest" is-config="true" duration-ms="45274" started-at="2019-07-31T14:16:56Z" finished-at="2019-07-31T14:17:42Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- runTest -->
-        <test-method status="FAIL" signature="launchTest()[pri:0, instance:com.ivorytech.basics.dartyTest0@685cb137]" name="launchTest" duration-ms="323002" started-at="2019-06-10T02:15:34Z" finished-at="2019-06-10T02:20:57Z">
+        <test-method status="FAIL" signature="launchTest()[pri:0, instance:com.ivorytech.basics.dartyTest0@685cb137]" name="launchTest" duration-ms="337556" started-at="2019-07-31T14:17:42Z" finished-at="2019-07-31T14:23:19Z">
           <exception class="java.lang.AssertionError">
             <message>
               <![CDATA[expected [true] but found [false]]]>
@@ -26,7 +26,7 @@ at org.testng.Assert.fail(Assert.java:96)
 at org.testng.Assert.failNotEquals(Assert.java:776)
 at org.testng.Assert.assertTrue(Assert.java:44)
 at org.testng.Assert.assertTrue(Assert.java:54)
-at com.ivorytech.basics.dartyTest0.launchTest(dartyTest0.java:104)
+at com.ivorytech.basics.dartyTest0.launchTest(dartyTest0.java:105)
 at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
 at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
@@ -58,7 +58,7 @@ at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
           <reporter-output>
           </reporter-output>
         </test-method> <!-- launchTest -->
-        <test-method status="PASS" signature="closeTest()[pri:0, instance:com.ivorytech.basics.dartyTest0@685cb137]" name="closeTest" is-config="true" duration-ms="0" started-at="2019-06-10T02:20:57Z" finished-at="2019-06-10T02:20:57Z">
+        <test-method status="PASS" signature="closeTest()[pri:0, instance:com.ivorytech.basics.dartyTest0@685cb137]" name="closeTest" is-config="true" duration-ms="0" started-at="2019-07-31T14:23:19Z" finished-at="2019-07-31T14:23:19Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- closeTest -->

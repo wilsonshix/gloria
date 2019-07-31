@@ -41,16 +41,16 @@ public class articleIsNotAvailable {	// A peaufiner encore
 	    	sd.Saisir(driver, sd.txt_searchBar,search);
 	    	sd.Cliquer(driver, sd.btn_search);
 
-			sd.isCorrectResultTitle(search);			
-			sd.displayAllArticles();
+			sd.isCorrectResultTitle(sd.txt_searchTitle,search);			
+			sd.displayAllArticles(driver, sd.lst_Noms_Articles, sd.txt_Nom_Article);
 
-			sd.displayAllSortingValue(); 
+			sd.displayAllSortingValue(driver, sd.lst_Noms_Articles);  
 			//sd.selectRandomCBoxValue();  
 			//sd.selectCBoxValue(sortingBy); ok
 
-			sd.clickOnRandomArticle();
+			sd.clickOnRandomArticle(driver, sd.lst_Noms_Articles);
 
-			if(pp.isBtnAddToCardPresent()==false){
+			if(pp.isBtnAddToCardPresent(driver)==false){
 				btn_addToCardIsDisplayed = false;
 				System.out.println("non dispo");
 			}
@@ -61,15 +61,15 @@ public class articleIsNotAvailable {	// A peaufiner encore
 		} while(btn_addToCardIsDisplayed==false);
 
 		try{
-			pp.clickOnAddToCart();
+			pp.Cliquer(driver, pp.btn_addToCard);
 		}
 		catch(org.openqa.selenium.StaleElementReferenceException e){
-			pp.clickOnAddToCart();	
+			pp.Cliquer(driver, pp.btn_addToCard);	
 		}
 
-		pp.isCorrectResultTitle();
+		pp.isCorrectResultTitle(pp.msg_productAdded);
 
-		pp.clickOnAccessToCart();
+		pp.clickOnAccessToCart(driver, pp.btn_AccessToCart);
 
 		try{
 			//*[@id='darty_push_accessoire']//iframe

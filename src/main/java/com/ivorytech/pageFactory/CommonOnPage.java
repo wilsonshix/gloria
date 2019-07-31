@@ -1,5 +1,7 @@
 package com.ivorytech.pageFactory;
 
+import java.util.List;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
@@ -107,9 +109,8 @@ public class CommonOnPage implements WebElementAction{
 	//Mon_Panier
 	@FindBy(xpath="//*[@id='h_xxl_panier_lien']")
 	@CacheLookup
-	public WebElement lnk_panier; 
-	
-	
+	public WebElement lnk_panier;
+
 	
 	
 	

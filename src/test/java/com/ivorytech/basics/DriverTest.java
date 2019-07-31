@@ -26,7 +26,7 @@ public class DriverTest {
 
 	DriverManager driverManager;
 	WebDriver driver;
-	String browser = "Firefox";
+	String browser = "Chrome";
     String url = "https://www.darty.com";
     String product = "LENOVO LEGION Y520-15IKBM 80YY003RFR";
     String search = "lenovo";
@@ -88,14 +88,14 @@ public class DriverTest {
 		SearchPage sp = new SearchPage(driver);
 		Assert.assertTrue(sp.isAt());
 		System.out.println("SearchPage was successfully loaded :"+driver.getTitle());
-		sp.displayAllArticles();
-		sp.clickOnSpecificArticle(product); // goToNextLink included
+		sp.displayAllArticles(driver, sp.lst_Noms_Articles, sp.txt_Nom_Article);
+		sp.clickOnSpecificArticle(driver, sp.lst_Noms_Articles,sp.lnk_PageSuivante,product); // goToNextLink included
 		
 		ProductPage pp = new ProductPage(driver);
     	Assert.assertTrue(pp.isAt());
     	System.out.println("ProductPage was successfully loaded :"+driver.getTitle());
-    	pp.clickOnAddToCart();
-    	pp.clickOnAccessToCart();   //have to fix the pop-in
+    	pp.Cliquer(driver, pp.btn_addToCard);
+    	pp.clickOnAccessToCart(driver, pp.btn_AccessToCart);   //have to fix the pop-in
     	
     	CartPage cp = new CartPage(driver);
     	Assert.assertTrue(cp.isAt());

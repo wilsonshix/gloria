@@ -5,7 +5,9 @@ import static org.testng.Assert.assertEquals;
 import java.util.List;
 import java.util.Random;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -203,6 +205,11 @@ public interface WebElementAction {
 				i++;
 			}   
 		}
+		
+		
+		
+		
+
 
 
 
@@ -282,11 +289,29 @@ public interface WebElementAction {
 
 		return false;
 	}
+	
+	
+	
+	
+	//Permet de repeter l'action de sélectionner une valeur précise dans un ménu déroulant : ComboBox
+	public default void performingSelectValueOnCBox(WebDriver driver, WebElement e, String v) {  
+		
+		boolean bool = SelectValueOnCBox(driver, e, v);
+		System.out.println("Entrée dans performingAction  - avant la boucle While - valeur initiale de b ="+bool);
+		
+		int i = 0;
+		while (bool == false && i < 2) { //repeter 2 fois      
+			
+			bool = SendKeysOnWebElement(driver, e, v);
+			System.out.println("performingAction n°"+i+" - dans la boucle While - valeur avant incrémentation de b ="+bool);
+			i++;
+		}   
+	}
 
 
 
 	//Permet de sélectionner une valeur précise dans un ménu déroulant : ComboBox
-	public default boolean selectValueOnCBox(WebDriver driver, WebElement e, String v){  
+	public default boolean SelectValueOnCBox(WebDriver driver, WebElement e, String v){  
 
 		try{
 
@@ -309,11 +334,29 @@ public interface WebElementAction {
 		}
 		return false;
 	}
+	
+	
+	
+	
+	//Permet de repeter l'action de sélectionner une valeur aléatoire dans un ménu déroulant
+	public default void performingSelectRandomValueOnCBox(WebDriver driver, List<WebElement> list) {  
+		
+		boolean bool = SelectRandomValueOnCBox(driver, list);
+		System.out.println("Entrée dans performingAction  - avant la boucle While - valeur initiale de b ="+bool);
+		
+		int i = 0;
+		while (bool == false && i < 2) { //repeter 2 fois      
+			
+			bool = SelectRandomValueOnCBox(driver, list);
+			System.out.println("performingAction n°"+i+" - dans la boucle While - valeur avant incrémentation de b ="+bool);
+			i++;
+		}   
+	}
 
 
 
 	//Permet de sélectionner une valeur aléatoire dans un ménu déroulant
-	public default boolean selectRandomValueOnCBox(WebDriver driver, List<WebElement> list){  
+	public default boolean SelectRandomValueOnCBox(WebDriver driver, List<WebElement> list){  
 
 		try{
 
@@ -349,6 +392,322 @@ public interface WebElementAction {
 		}
 		return false;
 	}
+	
+	
+	
+	
+	/*///////////////////////////////////////////////////////// SearchPage //////////////////////////////////////////////////////////////////////*/
+	
+	
+	/*public default void goToNexLink(Driver driver, WebElement e){		
+		performingClickOnWebElement(driver, e);	 //pageLink	
+	}*/
+
+// Récupérer le titre de la recherche du produit
+	public default String getSearchTitle(WebElement e){		//WebElement txt_searchTitle
+		return e.getText();
+	}
+
+	//Vérifier que le titre de la recherche est correcte
+	public default void isCorrectResultTitle(WebElement e, String search){		
+		String title= "Résultats pour :"+search+"!";	
+		Assert.assertEquals(e.getText().toString().toLowerCase(), title.toLowerCase());
+	}
+
+	//Vérifier si la recherche retourne des résultats  KO
+/*	public default boolean areArticlesPresent(){	
+		boolean display = driver.findElement(By.id("request_title")).isDisplayed();
+		return 	display;
+	}*/
+
+
+
+
+	//Sélectionner un article : aléatoirement
+	public default void clickOnRandomArticle(WebDriver driver, List<WebElement> list){ 
+		//List<WebElement> items = list; 	    // articles_Nom	
+		int size = getArticleSize(list);
+		Random rand = new Random();
+		System.out.println("**********************************");
+
+		int number = rand.nextInt(size);  //0 + 31
+		System.out.println("radom number :"+number);
+
+		int i = 0;
+		for(WebElement item : list) {		
+
+			if(!(item.getText().isEmpty())){	
+				System.out.println("i: "+i+"  "+item.getText());
+				if(i==number){
+					System.out.println("l'heureux élu est : "+i+" :"+item.getText());
+					performingClickOnWebElement(driver, item);	
+					break;
+				}
+				i++;
+			}				
+		}
+	}
+
+
+
+	//Sélectionner un article en cliquant sur son image								A supprimer / Remplacer par Cliquer()
+	public default void clickOnImageArticle(WebDriver driver, WebElement e){
+		performingClickOnWebElement(driver, e);  // article_img
+	}
+
+
+	// Connaitre l'état de recherche d'un article bien défini : par son nom	                       
+	//Si trouvé => cliquer  Sinon goToNext
+	public default void clickOnSpecificArticle(WebDriver driver, List<WebElement> list, WebElement lnkNext, String keyword){		//WebElement e
+		List<WebElement> items = list; 		//articles_Nom
+		boolean rep = false;
+		
+		do{
+			for (WebElement e : items) {	//e
+				rep = ArticleFound(driver, e, keyword);
+				if(rep == true){
+					break;
+				}
+			}
+			if(rep == false){
+				Cliquer(driver, lnkNext);
+			}
+		}while(rep == false);
+	}			
+
+
+
+
+
+
+	// Permet d'obtenir le nombre d'articles 
+	public default int getArticleSize(List<WebElement> list){
+		List<WebElement> myElements = list; 	 //articles_Nom
+		int i = 0;
+		for(WebElement e : myElements) {			
+
+			if(!(e.getText().isEmpty())){					
+				i++;
+			}						
+		}		
+		return i;
+	}	
+
+
+	// Permet d'afficher tous les articles trouvés par la recherche
+	public default void displayAllArticles(WebDriver driver, List<WebElement> list, WebElement wb){
+		
+		boolean bool = isElementPresent(driver, wb); // <> article_Nom     Demo pour �viter les objets non atteignables
+		if(bool==true){
+			
+			List<WebElement> myElements = list;   //articles_Nom
+			int i = 0;
+			for(WebElement e : myElements) {			
+
+				if(!(e.getText().isEmpty())){				
+					System.out.println(i +": "+e.getText());
+					i++;
+				}			
+			}
+			System.out.println("elements : "+i );
+		}
+	}
+
+
+
+	//Sélectionner une des options de tri, en fonction de sa valeur 		
+	public default void selectCBoxValue(WebDriver driver, WebElement cbox, String value){ 		
+		performingSelectValueOnCBox(driver, cbox, value);  				
+	}
+
+	//Sélectionner une des options de tri, de manière aléatoire	
+	public default void selectRandomCBoxValue(WebDriver driver, List<WebElement> cbxItems){
+		performingSelectRandomValueOnCBox(driver, cbxItems);      			
+	}
+
+	//Récuperer toutes les options de tri, dans une liste	
+	public default List<WebElement> getAllSortingValue(WebDriver driver, WebElement wb){
+		List<WebElement> myElements = driver.findElements(By.xpath("//*[@id='sort_by']/option"));		
+		return myElements;
+	}	
+
+	//Afficher toutes les options de tri, dans la console	
+	public default void displayAllSortingValue(WebDriver driver, List<WebElement> list){		
+		List<WebElement> myElements = list; 				//driver.findElements(By.xpath("//*[@id='sort_by']/option"));
+		for(WebElement e : myElements) {
+			System.out.println(e.getText());			
+		}
+		System.out.println(myElements.size());
+	}
+
+	
+
+	/*///////////////////////////////////////////////////////// ProductPage /////////////////////////////////////////////////////////////////////////////// */
+	
+	
+	//Savoir si la garantie est proposée
+		public default void isGuaranteePresent(){		
+			//boolean rep = Assert.assertTrue(txt_guarantee.isDisplayed());
+		}
+		
+
+		
+		
+		
+		//Improve avec Replay et repeat after 
+		//Vérifier la présence du bouton Ajouter ***Autrement il n'est pas disponible      btn_addToCard
+		public default boolean addToCardIsDisplayed(WebElement e){
+			boolean rep = true;
+			if(e.isDisplayed()){
+				rep = true;
+			}else{
+				rep = false;
+			}
+			return rep;		
+		}
+		
+		
+		//Improve avec Replay et repeat after 
+		public default boolean isBtnAddToCardPresent(WebDriver driver){
+		    try{
+		        driver.findElement(By.xpath("//div/form/button[@class='ajout_panier_bouton btn-reset']"));
+		        return true;
+		    }
+		    catch(NoSuchElementException e){
+		        return false;
+		    }
+		}
+		
+		
+		
+		/*public boolean isElementPresent(String xpathOfElement){
+		    try{
+		        driver.findElement(By.xpath(xpathOfElement));
+		        return true;
+		    }
+		    catch(NoSuchElementException e){
+		        return false;
+		    }
+		}*/
+		
+		
+
+
+		//Improve
+		//Vérifier que le produit a été bien ajouté au panier
+		public default void isCorrectResultTitle(WebElement wb){							// msg_productAdded
+			String title= "Votre produit a bien �t� ajout� au panier";	
+			Assert.assertEquals(wb.getText().toString().toLowerCase(), title.toLowerCase());
+		}
+
+		//Permet d'accéder au panier
+		public default void clickOnAccessToCart(WebDriver driver, WebElement wb){			// btn_AccessToCart
+			Cliquer(driver, wb);
+			
+			//Exp�rimentation de action tracing
+			System.out.println("Click btn Acc�der au panier - OK");
+			
+			}
+
+		//Permet d'accéder au panier avec gestion des alertes
+		public default void clickOnAccessToCart2(WebDriver driver, WebElement wb){      // btn_AccessToCart
+
+			try {
+				// Get the number of windows open before clicking
+				int numberOfWindowsBefore = driver.getWindowHandles().size();
+				String title = driver.getTitle();
+				wb.click();
+				// Check how many windows are open after clicking 
+				int numberOfWindowsAfter = driver.getWindowHandles().size();
+
+				// Now compare the number of windows before and after clicking			
+				if (numberOfWindowsBefore < numberOfWindowsAfter) {
+					// If there is a new window available, switch to it.
+					//driver.switchTo().window(title);
+					driver.findElement(By.xpath("//*[@id='kClose']")).click();
+
+					System.out.println("le w� est visible tch� !");
+				}
+
+			} catch (TimeoutException ex) {
+				System.out.println("le w� n'est pas visible tch� !");
+			}
+
+		}
+
+
+		//Fermer la pop up qui s'affiche après avoir cliqué sur btn clickOnAccessToCart
+		//lorsque le pop up n'est pas présent = erreur
+		public default void clickOnCloseAlert(WebElement wb){    //btn_CloseAlert
+			wb.click();
+		}
+
+
+
+
+
+
+
+
+		
+		/*
+		 * 
+	Following are ways to check if an Web-Element isPresent or not :
+	I have used XPath as an Element Identifier/Locator, but you can use other locators as well.
+
+	Solution I :
+
+	public boolean isElementPresent(String xpathOfElement){
+	    try{
+	        driver.findElement(By.xpath(xpathOfElement));
+	        return true;
+	    }
+	    catch(NoSuchElementException e){
+	        return false;
+	    }
+	}
+
+	Solution II :
+
+	public boolean isElementPresent(String xpathOfElement){
+	    boolean isPresent = false;
+	    if(!driver.findElements(By.xpath(xpathOfElement)).isEmpty()){
+	        isPresent=true;
+	    }
+	    return isPresent;
+	}
+	Solution III :
+
+	public boolean isElementPresent(String xpathOfElement){
+	    return driver.findElements(By.xpath(xpathOfElement)).size() > 0;
+	}
+		
+	*/
+	
+	
+	
+	
+	
+	
+	
+		/*/////////////////////////////////////////////////////////////// Others Things //////////////////////////////////////////////////////////////////// */
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

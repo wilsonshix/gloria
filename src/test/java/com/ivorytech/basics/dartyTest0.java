@@ -97,15 +97,15 @@ public class dartyTest0 {
     	Assert.assertTrue(sp.isAt());
     	System.out.println("SearchPage was successfully loaded :"+driver.getTitle());
     	
-    	sp.selectRandomCBoxValue();
-    	sp.goToNexLink();
-    	sp.clickOnRandomArticle();
+    	sp.selectRandomCBoxValue(driver, sp.Lst_CBoxValues );
+    	sp.Cliquer(driver, sp.lnk_PageSuivante);
+    	sp.clickOnRandomArticle(driver, sp.lst_Noms_Articles);
     	
     	ProductPage pp = new ProductPage(driver);
     	Assert.assertTrue(pp.isAt());
     	System.out.println("ProductPage was successfully loaded :"+driver.getTitle());
-    	pp.clickOnAddToCart();
-    	pp.clickOnAccessToCart();   //have to fix the pop-in
+    	pp.Cliquer(driver, pp.btn_addToCard);
+    	pp.clickOnAccessToCart(driver, pp.btn_AccessToCart);   //have to fix the pop-in
     	
     	CartPage cp = new CartPage(driver);
     	Assert.assertTrue(cp.isAt());
