@@ -27,6 +27,9 @@ public interface WebElementAction {
 	2- Vérification de la présence d'objet
 */
 
+	/*
+	 * METHODES A DESTINATION DES UTILISATEURS
+*/
 
 	// #1  Renseigner une valeur dans un objet
 	public default void Saisir(WebDriver driver, WebElement e, String a){
@@ -40,16 +43,39 @@ public interface WebElementAction {
 		System.out.println("Cliquer sur -- "+ e.getTagName());
 		performingClickOnWebElement(driver, e);		
 	}
+	
+	// #3 Sélectionner un item dans un ComboBox
+	public default void Selectionner(WebDriver driver, WebElement e){
+		System.out.println("Cliquer sur -- "+ e.getTagName());
+		//performingClickOnWebElement(driver, e);		
+		
+		/*		Si 1 parametre => 	performingSelectRandomValueOnCBox(driver, cbxItems);
+				Si 2 parametres => 	performingSelectValueOnCBox(driver, cbox, value);
+				
+				Le faire dans le code, depuis le lecteur des actions
+		  			
+		 */		
+		
+	}
 
 
-	// #3 Atteindre une page
+	
+	// #4 Atteindre une page
 	public default void AtteindrePage(WebDriver driver, WebElement e){ 
 		System.out.println("Accéder à la page ");
 		performingClickOnWebElement(driver, e);
 	}
+	
+	
 
+	
+	
+	
+	
+	
+	
      // To improve
-	// #4 Vérifier le statut de connexion de l'utilisateur
+	//  Vérifier le statut de connexion de l'utilisateur
 	public default void verifierConnexion(WebDriver driver, WebElement seConnecter, WebElement etreConnecte, WebElement seDeconnecter){	
 
 		boolean Connexion_isClickable = WaitForWebElement(driver, seConnecter);
@@ -71,7 +97,7 @@ public interface WebElementAction {
 
 	
 	
-	// Vérifier qu'un Element est (cliquable) présent => pour les getElement        // tous les objets cliquales
+	// Vérifier qu'un Element soit présent (cliquable) => pour les getElement        // tous les objets cliquales
 	public default boolean isElementPresent(WebDriver driver, WebElement e) {    
 
 		boolean isClickable = WaitForWebElement(driver, e);
@@ -330,7 +356,14 @@ public interface WebElementAction {
 			return true;
 
 		}catch(Throwable ex){
-			System.out.println("Error found: "+ex.getMessage());
+			if(ex.getMessage().contains("no such element")){
+				System.out.println(" NoSuchElementException - L'élément est introuvable !");
+				return false;
+			}
+			else if(!(ex.getMessage()==null)) {
+				System.out.println("Error found: "+ex.getMessage());
+				return false;
+			}
 		}
 		return false;
 	}
@@ -367,11 +400,13 @@ public interface WebElementAction {
 			System.out.println("random CBoxIndex :"+number);	
 			System.out.println("random CBoxValue :"+items.get(number).getText());	
 			items.get(number).click();
+			//ClickOnWebElement(driver,items.get(number));		pour la prochaine évolution !!
 			return true;
 
 		}catch(Throwable ex){
 			System.out.println("Error found: "+ex.getMessage());
-		}
+			
+			}
 		return false;
 	}
 
