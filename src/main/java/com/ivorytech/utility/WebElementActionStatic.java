@@ -1,7 +1,5 @@
 package com.ivorytech.utility;
 
-import static org.testng.Assert.assertEquals;
-
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -13,46 +11,57 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.CacheLookup;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import org.apache.log4j.Logger;
-
-import com.ivorytech.pageFactory.LoginPage;
-
-public interface WebElementAction {
+public class WebElementActionStatic {
 
 /*
 	1- Chargement de la page
 	2- Vérification de la présence d'objet
 */
+	
+	 //static WebDriver driver;
 
-	/*
-	 * METHODES A DESTINATION DES UTILISATEURS
-*/
+	
+/***************************************************************************************************************************************************
+ * METHODES PUBLIQUES A DESTINATION DES UTILISATEURS
+ **************************************************************************************************************************************************/
+
+	
+	public static String PreviousPageTitle = "PreviousPageTitle"; 
+	public static String ActualPageTitle ="ActualPageTitle"; 
+	
+	
 
 	// #1  Renseigner une valeur dans un objet
-	public default void Saisir(WebDriver driver, WebElement e, String a){
+	public static void Saisir(WebDriver driver, WebElement e, String a){
 		System.out.println("Renseigner -- "+ e.getTagName()+" avec la valeur -- "+a.toString());
 		performingSendKeysOnWebElement(driver, e, a.trim());		
 	}
 
 
 	// #2  Cliquer sur un objet
-	public default void Cliquer(WebDriver driver, WebElement e){
+	public static void Cliquer(WebDriver driver, WebElement e){
 		System.out.println("Cliquer sur -- "+ e.getTagName());
 		performingClickOnWebElement(driver, e);		
 	}
 	
+	
 	// #3 Sélectionner un item dans un ComboBox
-	public default void Selectionner(WebDriver driver, WebElement e){
-		System.out.println("Cliquer sur -- "+ e.getTagName());
-		//performingClickOnWebElement(driver, e);		
+	public static void Selectionner(WebDriver driver, WebElement cbox, List<WebElement> list, String value){
+		
+		if(value.isEmpty()) {
+			System.out.println("Cliquer sur -- "+ ((WebElement) list).getTagName());
+			performingSelectRandomValueOnCBox(driver, list);
+		}else {
+			System.out.println("Cliquer sur -- "+ cbox.getTagName());
+			performingSelectValueOnCBox(driver, cbox, value);
+		}
+		
 		
 		/*		Si 1 parametre => 	performingSelectRandomValueOnCBox(driver, cbxItems);
 				Si 2 parametres => 	performingSelectValueOnCBox(driver, cbox, value);
@@ -66,32 +75,20 @@ public interface WebElementAction {
 
 	
 	// #4 Atteindre une page
-	public default void Naviguer(WebDriver driver, String url){ 
-		System.out.println("Accéder à la page ");
-		driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS); 
+	public static void Naviguer(WebDriver driver, String url){ 
+		System.out.println("Aller sur la page : ");
+		driver.manage().timeouts().implicitlyWait(7,TimeUnit.SECONDS); 
 		driver.get(url);
 		driver.getTitle();
+		WaitForWebPageLoaded(driver);		
 	}
 	
-	
-
-	
-	public default int randomizePairNumber(int size){
-		Random rand = new Random();
-		int  number = rand.nextInt((size/2)) + 0;	// 1 < number < items.size() 		div par 2 pour obtenir le bon nombre
-		if (number % 2 != 1) {
-			System.out.println(" number :"+ number);
-		}
 		
-		return number;
-	}
-	
-	
 	
 	
      // To improve
 	//  Vérifier le statut de connexion de l'utilisateur
-	public default void verifierConnexion(WebDriver driver, WebElement seConnecter, WebElement etreConnecte, WebElement seDeconnecter){	
+	public static void verifierConnexion(WebDriver driver, WebElement seConnecter, WebElement etreConnecte, WebElement seDeconnecter){	
 
 		boolean Connexion_isClickable = WaitForWebElement(driver, seConnecter);
 		boolean Connecte_isVisible = WaitForWebElement(driver, etreConnecte);  
@@ -111,9 +108,14 @@ public interface WebElementAction {
 
 
 	
+/***************************************************************************************************************************************************
+* METHODES PRIVEES A DESTINATION DES DEVELOPPEURS
+**************************************************************************************************************************************************/
+
+	
 	
 	// Vérifier qu'un Element soit présent (cliquable) => pour les getElement        // tous les objets cliquales
-	public default boolean isElementPresent(WebDriver driver, WebElement e) {    
+	private static void isElementPresent(WebDriver driver, WebElement e) {    
 
 		boolean isClickable = WaitForWebElement(driver, e);
 		int i = 1;
@@ -123,29 +125,18 @@ public interface WebElementAction {
 			i++;
 
 			if(isClickable == false && i==4) {
-				System.out.println("L'objet n'a pas été retrouvé : "+e.getText());
+				System.out.println("L'objet n'a pas été retrouvé : "+e.getText());   // Veuillez recharger la page ou vérifier la connexion
 			}
-		}        
-
-		return isClickable; 
+		}  
 	}	
 	
 	
 	
-	
-	
-	// Vérifier et qu'on soit sur la bonne page (page soit complètement chargée)
-	/*
-	LoginPage lp = new LoginPage(driver); 
-	Assert.assertTrue(lp.isAt());
-	System.out.println("LoginPage was successfully loaded :"+driver.getTitle());
-	*/  
-	
-	// Mettre ces genres de méthodes comme statics
-	
-	// Charger une Page avant toute opération dessus
-	public default void ChargerPage(WebDriver driver, WebElement element, String page) {
-		boolean isLoaded = isPageLoaded(driver, element, page);
+
+	// Pas trop utile puisque WaitForWebPageLoaded est intégré dans Naviguer
+	// Vérifier qu'une page est entierement Chargee avant toute opération dessus
+	public static void ChargerPage(WebDriver driver, WebElement referenceElement, String page) {
+		boolean isLoaded = isPageLoaded(driver, referenceElement, page);
 		
 		if(isLoaded == true) {
 			System.out.println("La page "+ page +" a été chargée avec succès ! -- "+driver.getTitle());
@@ -159,9 +150,9 @@ public interface WebElementAction {
 	
 	
 	
-	
+	// A modifier puisque je vais inclure WaitForWebPageLoaded dans ChargerPage et Naviguer
 	// Vérifier qu'une page soit complètement chargée + et qu'on soit sur la bonne page
-	public default boolean isPageLoaded(WebDriver driver, WebElement element, String page) {    
+	private static boolean isPageLoaded(WebDriver driver, WebElement element, String page) {    
 		WaitForWebPageLoaded(driver);
 		boolean isClickable = WaitForWebElement(driver, element);
 		int i = 0;
@@ -183,25 +174,25 @@ public interface WebElementAction {
 	
 
 	//Attendre le chargement complet d'une page
-	public default void  WaitForWebPageLoaded(WebDriver driver) {
+	private static void  WaitForWebPageLoaded(WebDriver driver) {
 		ExpectedCondition<Boolean> pageLoadCondition = new
 				ExpectedCondition<Boolean>() {
 			public Boolean apply(WebDriver driver) {
 				return ((JavascriptExecutor)driver).executeScript("return document.readyState").equals("complete");
 			}
 		};
-		WebDriverWait wait = new WebDriverWait(driver, 30); // Attendre 30 secondes à chaque fois
+		WebDriverWait wait = new WebDriverWait(driver, 15); // Attendre 15 secondes à chaque fois
 		wait.until(pageLoadCondition);        
 	}
 	
 	
 	
 
-	//	Attendre le chargement complet d'un élément sur une page et Vérifier que cet élément soit localisé et cliquable
-	public default boolean WaitForWebElement(WebDriver driver, WebElement e) {
+	//	Attendre et Vérifier qu'un élément soit localisé et cliquable
+	private static boolean WaitForWebElement(WebDriver driver, WebElement e) {
 		WebElement myDynamicElement = null;
 		try {
-			myDynamicElement = (new WebDriverWait(driver, 10))           // Attendre 10 secondes             
+			myDynamicElement = (new WebDriverWait(driver, 5))           // Attendre 5 secondes             
 					.until(ExpectedConditions.elementToBeClickable(e)); // located and clickable (visible and enabled).
 			return true;
 		} catch (TimeoutException ex) {        	
@@ -216,7 +207,7 @@ public interface WebElementAction {
 	
 	
 	//Permet de repeter une action de click sur un WebElement
-		public default void performingClickOnWebElement(WebDriver driver, WebElement e) {  
+		private static void performingClickOnWebElement(WebDriver driver, WebElement e) {  
 			
 			boolean bool = ClickOnWebElement(driver, e);
 			System.out.println("Entrée dans performingAction  - avant la boucle While - valeur initiale de b ="+bool);
@@ -227,13 +218,18 @@ public interface WebElementAction {
 				bool = ClickOnWebElement(driver, e);
 				System.out.println("performingAction n°"+i+" - dans la boucle While - valeur avant incrémentation de b ="+bool);
 				i++;
+				
+				if(i==2 && bool==false) {					
+					//Verifier que l'element est présent/visible dans la page
+					isElementPresent(driver, e);
+				}
 			}   
 		}
 
 
 		
 	//Permet de repeter une action d'écrire dans un WebElement
-		public default void performingSendKeysOnWebElement(WebDriver driver, WebElement e, String v) {  
+		private static void performingSendKeysOnWebElement(WebDriver driver, WebElement e, String v) {  
 			
 			boolean bool = SendKeysOnWebElement(driver, e, v);
 			System.out.println("Entrée dans performingAction  - avant la boucle While - valeur initiale de b ="+bool);
@@ -244,6 +240,11 @@ public interface WebElementAction {
 				bool = SendKeysOnWebElement(driver, e, v);
 				System.out.println("performingAction n°"+i+" - dans la boucle While - valeur avant incrémentation de b ="+bool);
 				i++;
+				
+				if(i==2 && bool==false) {					
+					//Verifier que l'element est présent/visible dans la page
+					isElementPresent(driver, e);
+				}
 			}   
 		}
 		
@@ -257,7 +258,7 @@ public interface WebElementAction {
 
 
 	//Permet de cliquer-sélectionner un WebElement
-	public default boolean ClickOnWebElement(WebDriver driver, WebElement e) {
+		private static boolean ClickOnWebElement(WebDriver driver, WebElement e) {
 		try {
 			e.click();
 			System.out.println("On click");	//A commenter
@@ -298,7 +299,7 @@ public interface WebElementAction {
 
 
 	//Permet de renseigner une valeur dans un WebElement : TextBox, ...
-	public default boolean SendKeysOnWebElement(WebDriver driver, WebElement e, String v) {
+	private static boolean SendKeysOnWebElement(WebDriver driver, WebElement e, String v) {
 		try {
 			e.clear();
 			e.sendKeys(v);
@@ -335,7 +336,7 @@ public interface WebElementAction {
 	
 	
 	//Permet de repeter l'action de sélectionner une valeur précise dans un ménu déroulant : ComboBox
-	public default void performingSelectValueOnCBox(WebDriver driver, WebElement e, String v) {  
+	private static void performingSelectValueOnCBox(WebDriver driver, WebElement e, String v) {  
 		
 		boolean bool = SelectValueOnCBox(driver, e, v);
 		System.out.println("Entrée dans performingAction  - avant la boucle While - valeur initiale de b ="+bool);
@@ -352,7 +353,7 @@ public interface WebElementAction {
 
 
 	//Permet de sélectionner une valeur précise dans un ménu déroulant : ComboBox
-	public default boolean SelectValueOnCBox(WebDriver driver, WebElement e, String v){  
+	private static boolean SelectValueOnCBox(WebDriver driver, WebElement e, String v){  
 
 		try{
 
@@ -387,7 +388,7 @@ public interface WebElementAction {
 	
 	
 	//Permet de repeter l'action de sélectionner une valeur aléatoire dans un ménu déroulant
-	public default void performingSelectRandomValueOnCBox(WebDriver driver, List<WebElement> list) {  
+	private static void performingSelectRandomValueOnCBox(WebDriver driver, List<WebElement> list) {  
 		
 		boolean bool = SelectRandomValueOnCBox(driver, list);
 		System.out.println("Entrée dans performingAction  - avant la boucle While - valeur initiale de b ="+bool);
@@ -404,7 +405,7 @@ public interface WebElementAction {
 
 
 	//Permet de sélectionner une valeur aléatoire dans un ménu déroulant
-	public default boolean SelectRandomValueOnCBox(WebDriver driver, List<WebElement> list){  
+	private static boolean SelectRandomValueOnCBox(WebDriver driver, List<WebElement> list){  
 
 		try{
 
@@ -429,7 +430,7 @@ public interface WebElementAction {
 
 
 	// Vérifier qu'un élément à été trouvé lors d'une recherche parmis plusieurs autres éléments
-	public default boolean ArticleFound(WebDriver driver, WebElement e, String p) {
+	private static boolean ArticleFound(WebDriver driver, WebElement e, String p) {
 
 		if(!(e.getText().isEmpty())){	
 			System.out.println("i:"+e.getText());
@@ -454,12 +455,12 @@ public interface WebElementAction {
 	}*/
 
 // Récupérer le titre de la recherche du produit
-	public default String getSearchTitle(WebElement e){		//WebElement txt_searchTitle
+	public static String getSearchTitle(WebElement e){		//WebElement txt_searchTitle
 		return e.getText();
 	}
 
 	//Vérifier que le titre de la recherche est correcte
-	public default void isCorrectResultTitle(WebElement e, String search){		
+	public static void isCorrectResultTitle(WebElement e, String search){		
 		String title= "Résultats pour :"+search+"!";	
 		Assert.assertEquals(e.getText().toString().toLowerCase(), title.toLowerCase());
 	}
@@ -474,7 +475,7 @@ public interface WebElementAction {
 
 
 	//Sélectionner un article : aléatoirement
-	public default void clickOnRandomArticle(WebDriver driver, List<WebElement> list){ 
+	public static void clickOnRandomArticle(WebDriver driver, List<WebElement> list){ 
 		//List<WebElement> items = list; 	    // articles_Nom	
 		int size = getArticleSize(list);
 		Random rand = new Random();
@@ -501,14 +502,14 @@ public interface WebElementAction {
 
 
 	//Sélectionner un article en cliquant sur son image								A supprimer / Remplacer par Cliquer()
-	public default void clickOnImageArticle(WebDriver driver, WebElement e){
+	public static void clickOnImageArticle(WebDriver driver, WebElement e){
 		performingClickOnWebElement(driver, e);  // article_img
 	}
 
 
 	// Connaitre l'état de recherche d'un article bien défini : par son nom	                       
 	//Si trouvé => cliquer  Sinon goToNext
-	public default void clickOnSpecificArticle(WebDriver driver, List<WebElement> list, WebElement lnkNext, String keyword){		//WebElement e
+	public static void clickOnSpecificArticle(WebDriver driver, List<WebElement> list, WebElement lnkNext, String keyword){		//WebElement e
 		List<WebElement> items = list; 		//articles_Nom
 		boolean rep = false;
 		
@@ -531,7 +532,7 @@ public interface WebElementAction {
 
 
 	// Permet d'obtenir le nombre d'articles 
-	public default int getArticleSize(List<WebElement> list){
+	public static int getArticleSize(List<WebElement> list){
 		List<WebElement> myElements = list; 	 //articles_Nom
 		int i = 0;
 		for(WebElement e : myElements) {			
@@ -545,9 +546,9 @@ public interface WebElementAction {
 
 
 	// Permet d'afficher tous les articles trouvés par la recherche
-	public default void displayAllArticles(WebDriver driver, List<WebElement> list, WebElement wb){
+	public static void displayAllArticles(WebDriver driver, List<WebElement> list, WebElement wb){
 		
-		boolean bool = isElementPresent(driver, wb); // <> article_Nom     Demo pour �viter les objets non atteignables
+		boolean bool = WaitForWebElement(driver, wb); // <> article_Nom     Demo pour �viter les objets non atteignables
 		if(bool==true){
 			
 			List<WebElement> myElements = list;   //articles_Nom
@@ -566,23 +567,23 @@ public interface WebElementAction {
 
 
 	//Sélectionner une des options de tri, en fonction de sa valeur 		
-	public default void selectCBoxValue(WebDriver driver, WebElement cbox, String value){ 		
+	public static void selectCBoxValue(WebDriver driver, WebElement cbox, String value){ 		
 		performingSelectValueOnCBox(driver, cbox, value);  				
 	}
 
 	//Sélectionner une des options de tri, de manière aléatoire	
-	public default void selectRandomCBoxValue(WebDriver driver, List<WebElement> cbxItems){
+	public static void selectRandomCBoxValue(WebDriver driver, List<WebElement> cbxItems){
 		performingSelectRandomValueOnCBox(driver, cbxItems);      			
 	}
 
 	//Récuperer toutes les options de tri, dans une liste	
-	public default List<WebElement> getAllSortingValue(WebDriver driver, WebElement wb){
+	public static List<WebElement> getAllSortingValue(WebDriver driver, WebElement wb){
 		List<WebElement> myElements = driver.findElements(By.xpath("//*[@id='sort_by']/option"));		
 		return myElements;
 	}	
 
 	//Afficher toutes les options de tri, dans la console	
-	public default void displayAllSortingValue(WebDriver driver, List<WebElement> list){		
+	public static void displayAllSortingValue(WebDriver driver, List<WebElement> list){		
 		List<WebElement> myElements = list; 				//driver.findElements(By.xpath("//*[@id='sort_by']/option"));
 		for(WebElement e : myElements) {
 			System.out.println(e.getText());			
@@ -591,12 +592,27 @@ public interface WebElementAction {
 	}
 
 	
+	
+
+	
+	public static int randomizePairNumber(int size){
+		Random rand = new Random();
+		int  number = rand.nextInt((size/2)) + 0;	// 1 < number < items.size() 		div par 2 pour obtenir le bon nombre
+		if (number % 2 != 1) {
+			System.out.println(" number :"+ number);
+		}
+		
+		return number;
+	}
+	
+	
+	
 
 	/*///////////////////////////////////////////////////////// ProductPage /////////////////////////////////////////////////////////////////////////////// */
 	
 	
 	//Savoir si la garantie est proposée
-		public default void isGuaranteePresent(){		
+		public static void isGuaranteePresent(){		
 			//boolean rep = Assert.assertTrue(txt_guarantee.isDisplayed());
 		}
 		
@@ -606,7 +622,7 @@ public interface WebElementAction {
 		
 		//Improve avec Replay et repeat after 
 		//Vérifier la présence du bouton Ajouter ***Autrement il n'est pas disponible      btn_addToCard
-		public default boolean addToCardIsDisplayed(WebElement e){
+		public static boolean addToCardIsDisplayed(WebElement e){
 			boolean rep = true;
 			if(e.isDisplayed()){
 				rep = true;
@@ -618,7 +634,7 @@ public interface WebElementAction {
 		
 		
 		//Improve avec Replay et repeat after 
-		public default boolean isBtnAddToCardPresent(WebDriver driver){
+		public static boolean isBtnAddToCardPresent(WebDriver driver){
 		    try{
 		        driver.findElement(By.xpath("//div/form/button[@class='ajout_panier_bouton btn-reset']"));
 		        return true;
@@ -645,13 +661,13 @@ public interface WebElementAction {
 
 		//Improve
 		//Vérifier que le produit a été bien ajouté au panier
-		public default void isCorrectResultTitle(WebElement wb){							// msg_productAdded
+		public static void isCorrectResultTitle(WebElement wb){							// msg_productAdded
 			String title= "Votre produit a bien �t� ajout� au panier";	
 			Assert.assertEquals(wb.getText().toString().toLowerCase(), title.toLowerCase());
 		}
 
 		//Permet d'accéder au panier
-		public default void clickOnAccessToCart(WebDriver driver, WebElement wb){			// btn_AccessToCart
+		public static void clickOnAccessToCart(WebDriver driver, WebElement wb){			// btn_AccessToCart
 			Cliquer(driver, wb);
 			
 			//Exp�rimentation de action tracing
@@ -660,7 +676,7 @@ public interface WebElementAction {
 			}
 
 		//Permet d'accéder au panier avec gestion des alertes
-		public default void clickOnAccessToCart2(WebDriver driver, WebElement wb){      // btn_AccessToCart
+		public static void clickOnAccessToCart2(WebDriver driver, WebElement wb){      // btn_AccessToCart
 
 			try {
 				// Get the number of windows open before clicking
@@ -688,7 +704,7 @@ public interface WebElementAction {
 
 		//Fermer la pop up qui s'affiche après avoir cliqué sur btn clickOnAccessToCart
 		//lorsque le pop up n'est pas présent = erreur
-		public default void clickOnCloseAlert(WebElement wb){    //btn_CloseAlert
+		public static void clickOnCloseAlert(WebElement wb){    //btn_CloseAlert
 			wb.click();
 		}
 
@@ -756,7 +772,7 @@ public interface WebElementAction {
 		//@CacheLookup 
 		//public WebElement txt_username;
 	
-		public default WebElement getLocator(WebDriver driver, String locator) throws Exception {
+	/*	public  default WebElement getLocator(WebDriver driver, String locator) throws Exception {
 	        String[] split = locator.split(":");
 			String locatorType = split[0];
 			String locatorValue = split[1];
@@ -814,7 +830,7 @@ public interface WebElementAction {
 				throw new Exception("Unknown locator type '" + locatorType + "'");
 		}
 		
-		
+		*/
 
 		/*public default WebElement getWebElement(String locator) throws Exception{
 			System.out.println("locator data:-"+locator+"is---"+Repository.getProperty(locator));

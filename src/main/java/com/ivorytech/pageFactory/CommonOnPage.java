@@ -16,7 +16,7 @@ import com.ivorytech.utility.WebElementAction;
 
 public class CommonOnPage implements WebElementAction{
 
-	WebDriver driver;
+	WebDriver driver; // déclaré pour toutes les autres pages
 
 
 	// Objects ............................................

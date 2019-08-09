@@ -84,7 +84,7 @@ public class dartyTest0 {
     	System.out.println("UserDetailsPage was successfully loaded :"+driver.getTitle());
     	
     	//go to HomePage
-    	up.AtteindrePage(driver,up.img_LogoPageAccueil);
+    	up.Naviguer(driver,"https:www.darty.com"); //
     	
     	//Assert.assertTrue(hp.isAt());
     	System.out.println("HomePage was successfully loaded :"+driver.getTitle());

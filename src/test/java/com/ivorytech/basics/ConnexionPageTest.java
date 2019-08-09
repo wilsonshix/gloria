@@ -2,6 +2,7 @@ package com.ivorytech.basics;
 
 import java.util.concurrent.TimeUnit;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -11,20 +12,27 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import org.apache.log4j.Logger;
-
 import com.ivorytech.driverFactory.DriverManager;
-import com.ivorytech.pageFactory.*;
+import com.ivorytech.pageFactory.CartPage;
+import com.ivorytech.pageFactory.ConnexionPage;
+import com.ivorytech.pageFactory.HomePage;
+import com.ivorytech.pageFactory.ProductPage;
+import com.ivorytech.pageFactory.SearchPage;
 
 
-public class TestLog4j {
-	
+import com.ivorytech.utility.WebElementActionStatic;
+
+public class ConnexionPageTest {
+
 	DriverManager driverManager;
-    WebDriver driver;
-    String browser = "Chrome";
-    String url = "https://www.darty.com";
+	static WebDriver driver;
+	String browser = "Chrome";
+    static String url = "https://www.darty.com/espace_client/connexion?storeId=10001&espaceclient=0&org=head";
+    String product = "LENOVO LEGION Y520-15IKBM 80YY003RFR";
     String search = "lenovo";
-    
+
+	
+	
     @BeforeTest
     public void setBrowserConfig(){
 		
@@ -43,63 +51,32 @@ public class TestLog4j {
 		driver.manage().window().maximize();  
 		//if can't find the element with in 10 sec, throw exception  
 		driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS); 
-		driver.get(url);
-		driver.getTitle();
+		//driver.get(url);
+		//driver.getTitle();
 	}
 
 	@AfterMethod
 	public void closeTest(){
 		//driver.quit();		
 	}
-
-
-
-
-    @Test
-    public void launchTest() {
-    	//driver.get(url);
-    	
-    	 	
-    	HomePage hp = new HomePage(driver);
-    	Assert.assertTrue(hp.isAt());
-    	System.out.println("HomePage was successfully loaded :"+driver.getTitle());    	    	    	
-    	Logger log = Logger.getLogger("HomePage was successfully loaded :"+driver.getTitle());
-    	log.info("Hello");
-    	hp.goToLoginPage();
-    	log.info("BABA aloubè");
-    	
-    	
-    /*	LoginPage lp = new LoginPage(driver);
-    	Assert.assertTrue(lp.isAt());
-    	System.out.println("LoginPage was successfully loaded :"+driver.getTitle());
-    	lp.Saisir(driver, lp.txt_username, "willdjako05@gmail.com");
-    	lp.Saisir(driver, lp.txt_password, "Alexandrine1");
-    	lp.Cliquer(driver, lp.btn_Connexion);
-    	
-    	*/
-
-    	    	
-    	    	
-    }
- 
-    
-
-    
-    
-    
-    
-    
-
+	
 	
 
-    
-    
-    
-    
-    
+	@Test
+	public static void launchTest() {
+		//driver.get(url);
+
+		ConnexionPage p = new ConnexionPage(driver);
+		
+		WebElementActionStatic.Naviguer(driver, url);
+		
+		WebElementActionStatic.Saisir(driver, ConnexionPage.txt_username,"willdjako05@gmail.com");
+		WebElementActionStatic.Saisir(driver, ConnexionPage.txt_password,"Alexandrine1");
+		WebElementActionStatic.Cliquer(driver, ConnexionPage.btn_Connexion);
+		
+	
+		
+
+
+	}
 }
-
-
-
-
-

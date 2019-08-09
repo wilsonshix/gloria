@@ -171,7 +171,7 @@ public class ExcelUtils {
                     } else if (currentCell.getCellType() == CellType.NUMERIC) {
                         System.out.print(currentCell.getNumericCellValue() + "--");
                     }else if (currentCell.getCellType() == CellType.BLANK) {
-                        System.out.print("||");
+                        System.out.print("|~|");
                     }
 
                 }
