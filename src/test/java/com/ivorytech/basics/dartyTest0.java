@@ -11,7 +11,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import com.ivorytech.driverFactory.DriverManager;
 import com.ivorytech.pageFactory.CartPage;
 import com.ivorytech.pageFactory.CommonOnPage;
 import com.ivorytech.pageFactory.HomePage;
@@ -23,8 +22,7 @@ import com.ivorytech.pageFactory.UserDetailsPage;
 
 public class dartyTest0 {
 	
-	DriverManager driverManager;
-    WebDriver driver;
+	WebDriver driver;
     String browser = "Chrome";
     String url = "https://www.darty.com";
     String search = "lenovo";
@@ -63,9 +61,7 @@ public class dartyTest0 {
 
     @Test
     public void launchTest() {
-    	//driver.get(url);
-    	
-    	 	
+    	    	 	
     	HomePage hp = new HomePage(driver);
     	Assert.assertTrue(hp.isAt());
     	//Assert.assertTrue(hp.isAt(driver,hp.lnk_Seconnecter,"HomePage"));

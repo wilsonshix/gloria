@@ -10,6 +10,7 @@ import io.appium.java_client.android.AndroidDriver;
 
 public class FirstAppiumTest {
 
+//automating mobile apps	
 public static void main(String[] args) {
 		
 		//Set the Desired Capabilities
@@ -29,5 +30,6 @@ public static void main(String[] args) {
 		} catch (MalformedURLException e) {
 			System.out.println(e.getMessage());
 		}
+		
 	}
 }
