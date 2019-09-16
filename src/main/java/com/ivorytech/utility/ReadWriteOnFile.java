@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.openqa.selenium.WebElement;
+
 import com.ivorytech.writer.ObjectFactory;
 import com.ivorytech.writer.CsvFileWriter;
 import com.ivorytech.writer.ExcelFileWriter;
@@ -27,12 +29,15 @@ public class ReadWriteOnFile {
 	// liste contenant les pageObjects
 	public static String liste = "";
 	
-	public static List<String> lstdemo = new ArrayList<>();
+	public static List<String> lstfolder = new ArrayList<>();
 	
-	public static List<String> lstrepo = new ArrayList<>();
+	public static List<String> ObjectValuedata;
 	
-	public static List<String> data = new ArrayList<>();
+	public static List<String> ObjectNamedata ;
 	
+	public static List<String> WebElement ;
+	
+	public static List<String> lstrepo ;
 	
 	
 	
@@ -43,7 +48,7 @@ public class ReadWriteOnFile {
 	            listFilesForFolder(fileEntry);
 	        } else {
 	        	//liste = liste + fileEntry.getName().trim()+",";
-	        	lstdemo.add(fileEntry.getName().trim());
+	        	lstfolder.add(fileEntry.getName().trim());
 	            System.out.println(fileEntry.getName());
 	         /*  if ((fileEntry.getName().substring(fileEntry.getName().lastIndexOf('.') + 1, fileEntry.getName().length()).toLowerCase()).equals("java")) {
 	        	   System.out.println("File= " + folder.getCanonicalPath()+ "\\" + fileEntry.getName());
@@ -51,7 +56,7 @@ public class ReadWriteOnFile {
 	           
 	        }
 	    } //System.out.println("liste"+liste);  //
-		return lstdemo;
+		return lstfolder;
 	}
 	
 	
@@ -62,7 +67,8 @@ public class ReadWriteOnFile {
 	
 	
 	
-	public static List<String> ReadFile(String fileName) throws IOException{  //Constant.Path_PageObject  + Constant.File_PageObject;
+	//@SuppressWarnings("resource")
+	public static List<String> ReadFileObject(String path, String fileName) throws Exception{  //Constant.Path_PageObject  + Constant.File_PageObject;
 		
 		
 		if (fileName != null) {		
@@ -72,21 +78,24 @@ public class ReadWriteOnFile {
         String locatorValue = null;
         String locatorStrategy = null;
         String WebElementName = null;
+        
+        ObjectValuedata = new ArrayList<>();
+        ObjectNamedata = new ArrayList<>();
+        lstrepo = new ArrayList<String>();
 
         try {
         	        	
             // FileReader reads text files in the default encoding.
-            FileReader fileReader = 
-                new FileReader(fileName);
+            FileReader fileReader = new FileReader(path+fileName);
 
             // Always wrap FileReader in BufferedReader.
             BufferedReader bufferedReader = new BufferedReader(fileReader);
 
             while((line = bufferedReader.readLine()) != null) {  
             	
-            	//if(line.startsWith("/"+"/")) {System.out.println("oui");}
+            	//if(line.trim().startsWith("//")) {continue;}//System.out.println("oui");
                             	     	
-                if(line.contains("@FindBy")) {  
+                if(line.trim().startsWith("@FindBy")) {  
                 	
                    System.out.println(line.trim().toString());  									// @FindBy(xpath="//*[@id='password']")     
                 	 
@@ -95,36 +104,85 @@ public class ReadWriteOnFile {
 	               String values[]  = line.trim().split(locatorStrategy);  						// @FindBy(  et //*[@id='password']")
 	             	 
 	   		       locatorValue = values[1].substring(2,values[1].length()-2);      //  //*[@id='password']
-		          // System.out.println("locatorStrategy : "+locatorStrategy);
-		           //System.out.println("locatorValue :"+locatorValue);
-		           //System.out.println(values[0]);
-		          // System.out.println(values[1]); 	                	 
-		           lstrepo.add(locatorStrategy+ ":" + locatorValue + ":" +fileName);		                           	 
+		           	                	 
+	   		    ObjectValuedata.add(locatorStrategy+ ":" + locatorValue + ":" +fileName);		                           	 
                 }
-           }               
+                
+                
+                if(line.trim().startsWith("WebElement")) {  
+                	
+                    System.out.println(line.trim().toString());  									// WebElement msg_MyBasket;     
+                 	 
+                   // WebElementName	               		   
+                   String name[] = null;	
+ 	               String values[]  = line.trim().split("WebElement");  						// msg_MyBasket;
+ 	             	 
+ 	              for (String val : values) {
+	    				if (!val.isEmpty()) {
+	    					System.out.println(val);
+	    					name = val.split(";");	    					
+	    				}
+	    			}
+ 		           	                	 
+ 	             ObjectNamedata.add(name[0]);		                           	 
+                 }
+                
+                
+                if(line.trim().startsWith("public WebElement")) {  
+                	
+                    System.out.println(line.trim().toString());  									// WebElement msg_MyBasket;     
+                 	 
+                   // WebElementName	               		   
+                   String name[] = null;	
+ 	               String values[]  = line.trim().split("public WebElement");  						// msg_MyBasket;
+ 	             	 
+ 	              for (String val : values) {
+	    				if (!val.isEmpty()) {
+	    					System.out.println(val);
+	    					name = val.split(";");	    					
+	    				}
+	    			}
+ 		           	                	 
+ 	             ObjectNamedata.add(name[0]);		                           	 
+                 }
+                
+           }
+            
+            // Always close files.
+            bufferedReader.close(); 
+            
+            if(ObjectValuedata.size() == ObjectNamedata.size()) {
+            	
+            	for(int i = 0; i<ObjectValuedata.size() ; i++) {            		
+            		lstrepo.add(ObjectNamedata.get(i)+ ":" + ObjectValuedata.get(i));            		
+            	}
+            }else if (ObjectValuedata.isEmpty() && ObjectNamedata.isEmpty()){
+            	//throw new Exception("ObjectValuedata : "+ObjectValuedata.size()+" # ObjectNamedata : " + ObjectNamedata.size());
+            	
+            	
+            }
+            
+            
             /*//
-    			for (String data : lstrepo) {
-    				String[] str = data.toString().split(":");
+    			for (String data : ObjectNamedata) {
+    				//String[] str = data.toString().split(":");
     				System.out.println(data); 
     			}*/
  
-            // Always close files.
-            bufferedReader.close();         
+            
+                    
         }
         catch(FileNotFoundException ex) {
-            System.out.println(
-                "Unable to open file '" + 
-                fileName + "'");                
+            System.out.println("Unable to open file '" + fileName + "'");                
         }
         catch(IOException ex) {
-            System.out.println(
-                "Error reading file '" 
-                + fileName + "'");                  
+            System.out.println("Error reading file '" + fileName + "'");                  
             // Or we could just do this: 
             // ex.printStackTrace();
         }
     }
-		return lstrepo;
+		
+		return lstrepo; //lstrepo    //ObjectValuedata
 	
 	}
 	
@@ -165,32 +223,26 @@ public class ReadWriteOnFile {
 	
 	public static void WriteReadFiles(File folder, String path, String fileType) throws IOException {
 		
-		List<String> listFolder = listFilesForFolder(folder);
+		List<String> listpageObject = listFilesForFolder(folder);
+		WebElement = new ArrayList<String>();
 				
-		if(listFolder!=null){
+		if(listpageObject!=null){
 		
-			listFolder.forEach(lstitem->{
+			listpageObject.forEach(lstitem->{
 			try {
 				System.out.println(lstitem);				
-				data = ReadFile(path+lstitem);
-				RepoCreator(lstitem,data, fileType);
+				WebElement = ReadFileObject(path,lstitem);
+				RepoCreator(lstitem,WebElement, fileType);
+				WebElement = null;
 				System.out.println("*********************");
-			} catch (IOException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		});
 		
 		}
 		
-	/*	String list = listFilesForFolder(folder);
-		
-		String[] tab = list.split(",");
-		
-	    for (String tmp : tab){
-	        System.out.println(tmp);
-	        ReadFile(path+tmp);
-	        System.out.println("*********************");
-	      }*/
+
 			
 		}
 	

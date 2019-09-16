@@ -35,10 +35,15 @@ public class CartPage extends CommonOnPage implements WebElementAction{
 	//Message Mon panier affiché
 	@FindBy(xpath="//*[@id='basket_title']")
 	WebElement msg_MyBasket;
+	
+	@FindBy(xpath="//*[@id='tester']")
+	public WebElement msg_test;
 
     //Bouton Commander
 	@FindBy(xpath="//*[@id='basket_content_inner_page']")
 	WebElement btn_Command;
+	
+	
 
 	// V�rifier que l'�l�ment est cliquable => page is loaded !
 		public boolean isAt() {    

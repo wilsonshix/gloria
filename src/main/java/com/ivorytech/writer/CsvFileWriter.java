@@ -9,7 +9,8 @@ import com.opencsv.CSVWriter;
 public class CsvFileWriter implements FileWrite {
 	@Override
 	public boolean writeToFile(String fileName, List<String> dData) {
-		try (CSVWriter writer = new CSVWriter(new FileWriter(ResourceHelper.getResourcePath("locator/") + fileName + ".csv",false),',')){
+		String filename[] = fileName.split(".java");
+		try (CSVWriter writer = new CSVWriter(new FileWriter(ResourceHelper.getResourcePath("locator/") + filename[0] + ".csv",false),',')){
 			for (String data : dData) {
 				String[] str = data.toString().split(":");
 				writer.writeNext(str, false);

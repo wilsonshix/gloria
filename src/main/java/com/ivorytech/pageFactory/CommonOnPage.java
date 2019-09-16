@@ -72,19 +72,7 @@ public class CommonOnPage implements WebElementAction{
 
 
 	
-	/*
-	 * //Etat_connect�
-	@FindBy(xpath="//a/span[@class='label']")
-	WebElement txt_connect�;
-	 */
-
-	//<span class="label">CONNECT�(E)</span>
-
-	//*[@id="h_xxl_login_lien"]/span
-
-
-
-
+	
 	// MENU CLIENT
 	
 	//CONNEXION
@@ -225,17 +213,14 @@ Page de r�sultats
 
 
 
-........................................................................
-//@FindBy(xpath="/html/body/div[1]/div/div/header/div/h1")
-   private WebElement heading;
-+
+.......................................................................
 //We will use this boolean for assertion. To check if page is opened
    public boolean isPageOpened(){
        return heading.getText().toString().contains("Developer portal");
    }
 ............................................................................
 
-//@FindBy(linkText="APPLY AS A DEVELOPER")
+
 
 ............................................................................
 

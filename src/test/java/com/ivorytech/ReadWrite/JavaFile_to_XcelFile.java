@@ -67,17 +67,36 @@ public class JavaFile_to_XcelFile {
 		//ReadWriteOnFile.ReadFile(Constant.Path_PageObject  + Constant.File_PageObject);
 		
 		
-		System.out.println("+++++++++++++++++++ WRITE READ FILE ++++++++++++++++++");
+		System.out.println("+++++++++++++++++++ WRITE READ FILE - BEGIN ++++++++++++++++++");
+				
+		//Lecture pageObjects et ecriture file .csv,...
+		//File folder = new File(Constant.Path_PageObject);
+		ReadWriteOnFile.WriteReadFiles(folder, Constant.Path_PageObject, "Csv");
 		
+		System.out.println("+++++++++++++++++++ WRITE READ FILE - END ++++++++++++++++++");
 		
-		
-		//ReadWriteOnFile.WriteReadFiles(folder, Constant.Path_PageObject, "Csv");
+		System.out.println("+++++++++++++++++++ READ PRINT - BEGIN ++++++++++++++++++");
 		
 		try {
 			List<String> allLines = Files.readAllLines(Paths.get("/Users/willd/Downloads/CartPage.java"));
 			System.out.println(allLines.size());
+			String name[] = null;
 			for (String line : allLines) {
-				System.out.println(line);
+				
+				if(line.trim().startsWith("WebElement")) {
+				System.out.println(line.trim());
+				String values[]  = line.trim().split("WebElement");
+		         System.out.println(values[0]+"null");
+		         System.out.println(values[1]);
+		         
+		         for (String val : values) {
+	    				if (!val.isEmpty()) {
+	    					System.out.println(val);
+	    					name = val.split(";");	    					
+	    				}
+	    			}
+		         System.out.println(name[0]);
+				}
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -93,6 +112,11 @@ public class JavaFile_to_XcelFile {
 		        .map(String::toUpperCase)
 		        .forEach(System.out::println);
 		}
+		
+		
+		System.out.println("+++++++++++++++++++ READ PRINT - END ++++++++++++++++++");
+		
+		
 		
 		
 		
