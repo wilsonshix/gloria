@@ -30,7 +30,7 @@ public class LoginPage extends CommonOnPage implements WebElementAction{
 	@CacheLookup	
 	public WebElement txt_password;
 
-	@FindBy(how = How.XPATH, using = "//*[@id=\"form-identification\"]/div[3]/button")	
+	@FindBy(xpath="//*[@id=\"form-identification\"]/div[3]/button")	
 	@CacheLookup 
 	public WebElement btn_Connexion;
 

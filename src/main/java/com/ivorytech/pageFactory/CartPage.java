@@ -24,7 +24,7 @@ public class CartPage extends CommonOnPage implements WebElementAction{
 	
 	
 	/*
-	 * @Entêtes
+	 * @Entï¿½tes
 	 */
 	
 	
@@ -32,19 +32,15 @@ public class CartPage extends CommonOnPage implements WebElementAction{
 	 * @Corps
 	 */
 	
-	//Message Mon panier affiché
+	//Message Mon panier affichÃ©
 	@FindBy(xpath="//*[@id='basket_title']")
 	WebElement msg_MyBasket;
 
     //Bouton Commander
 	@FindBy(xpath="//*[@id='basket_content_inner_page']")
-	
-	//@FindBy(xpath="//form/input[@class='submit_button']")
-	//*[@id="basket_content_inner_page"]/div[3]/div[2]/form/button
-	//<button type="submit" class="btn btn-secondary btn-large btn-basket-submit">Commander</button>
 	WebElement btn_Command;
 
-	// Vérifier que l'élément est cliquable => page is loaded !
+	// Vï¿½rifier que l'ï¿½lï¿½ment est cliquable => page is loaded !
 		public boolean isAt() {    
 	    	
 	        boolean isClickable = WaitForWebElement(driver, btn_Command);
@@ -68,6 +64,8 @@ public class CartPage extends CommonOnPage implements WebElementAction{
 
 	//tr 	class = "product_line dispo pse" 
 	
+
+
 
 }
 

@@ -24,8 +24,8 @@ public class HomePageExcel extends CommonOnPage implements WebElementAction{
 		
 	//Objects
 	
-	//@FindBy(how = How.XPATH, using = "//*[@id='h_xxl_login_lien']")	
-	@FindBy(xpath= "//*[@id='h_xxl_login_lien']")	
+	
+	@FindBy(xpath="//*[@id='h_xxl_login_lien']")	
 	@CacheLookup
 	static WebElement lnk_Seconnecter;
 
@@ -38,7 +38,7 @@ public class HomePageExcel extends CommonOnPage implements WebElementAction{
 	@CacheLookup
 	WebElement txt_password;
 	
-	@FindBy(how = How.XPATH, using = "//*[@id=\"form-identification\"]/div[3]/button")	
+	@FindBy(xpath="//*[@id=\"form-identification\"]/div[3]/button")	
 	@CacheLookup
 	WebElement btn_Connexion;
 	

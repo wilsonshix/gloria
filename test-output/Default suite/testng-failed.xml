@@ -3,14 +3,11 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.ivorytech.basics.ConnexionPageTest">
+      <class name="com.ivorytech.ReadWrite.JavaFile_to_XcelFile">
         <methods>
-          <include name="closeTest"/>
-          <include name="runTest"/>
-          <include name="setBrowserConfig"/>
-          <include name="launchTest"/>
+          <include name="test"/>
         </methods>
-      </class> <!-- com.ivorytech.basics.ConnexionPageTest -->
+      </class> <!-- com.ivorytech.ReadWrite.JavaFile_to_XcelFile -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

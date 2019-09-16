@@ -31,17 +31,17 @@ public class CommonOnPage implements WebElementAction{
 	
  
  //SOLDES
-	@FindBy(xpath = "//*[@id=\"main-tab-id-1\"]/a")	
+	@FindBy(xpath="//*[@id=\"main-tab-id-1\"]/a")	
 	@CacheLookup
 	public WebElement Menu_soldes;
 	
  //BONS PLANS
-	@FindBy(xpath = "//*[@id=\"main-tab-id-2\"]/a")	
+	@FindBy(xpath="//*[@id=\"main-tab-id-2\"]/a")	
 	@CacheLookup
 	public WebElement Menu_bons_plans;
 	
  //CUISINES SUR MESURES
-	@FindBy(xpath = "//*[@id=\"main-tab-id-3\"]/a")	
+	@FindBy(xpath="//*[@id=\"main-tab-id-3\"]/a")	
 	@CacheLookup
 	public WebElement Menu_cuisines_sur_mesures;
 	
@@ -50,17 +50,17 @@ public class CommonOnPage implements WebElementAction{
 	
 	
  //PAGE D'ACCUEIL
-	@FindBy(xpath = "//*[@id='logo']")	
+	@FindBy(xpath="//*[@id='logo']")	
 	@CacheLookup
 	public WebElement img_LogoPageAccueil;
 
 	//Barre de recherche
-	@FindBy(xpath ="//*[@id='dartyCom_searchfield_xxl']")
+	@FindBy(xpath="//*[@id='dartyCom_searchfield_xxl']")
 	@CacheLookup
 	public WebElement txt_searchBar;
 
 	//bouton de recherche
-	@FindBy(xpath ="//*[@id='dartyCom_searchform_submit']")
+	@FindBy(xpath="//*[@id='dartyCom_searchform_submit']")
 	@CacheLookup
 	public WebElement btn_search;
 
@@ -226,7 +226,7 @@ Page de r�sultats
 
 
 ........................................................................
-@FindBy(xpath = "/html/body/div[1]/div/div/header/div/h1")
+//@FindBy(xpath="/html/body/div[1]/div/div/header/div/h1")
    private WebElement heading;
 +
 //We will use this boolean for assertion. To check if page is opened
@@ -235,7 +235,7 @@ Page de r�sultats
    }
 ............................................................................
 
-@FindBy(linkText = "APPLY AS A DEVELOPER")
+//@FindBy(linkText="APPLY AS A DEVELOPER")
 
 ............................................................................
 

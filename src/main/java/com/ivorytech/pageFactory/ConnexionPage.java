@@ -28,7 +28,7 @@ public class ConnexionPage extends CommonOnPage  {
 	@CacheLookup	
 	public static WebElement txt_password;
 
-	@FindBy(how = How.XPATH, using = "//*[@id=\"form-identification\"]/div[3]/button")	
+	@FindBy(xpath="//*[@id=\"form-identification\"]/div[3]/button")	
 	@CacheLookup 
 	public static WebElement btn_Connexion;
 
