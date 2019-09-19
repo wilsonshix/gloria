@@ -52,9 +52,9 @@ public class JavaFile_to_XcelFile {
 		System.out.println("+++++++++++++++++++ FOLDER FILES LISTING ++++++++++++++++++");
 				
 						
-		File folder = new File(Constant.Path_PageObject);        // ReadWriteOnFile.listFilesForFolder();
+		File folder = new File(Constant.usrDir + Constant.Path_PageObject);        // ReadWriteOnFile.listFilesForFolder();
 		
-		String path = Constant.Path_PageObject;					 // ReadWriteOnFile.WriteReadFiles();
+		String path = Constant.usrDir + Constant.Path_PageObject;					 // ReadWriteOnFile.WriteReadFiles();
 		
 		//ReadWriteOnFile.listFilesForFolder(folder);
 		
@@ -71,13 +71,14 @@ public class JavaFile_to_XcelFile {
 				
 		//Lecture pageObjects et ecriture file .csv,...
 		//File folder = new File(Constant.Path_PageObject);
-		ReadWriteOnFile.WriteReadFiles(folder, Constant.Path_PageObject, "Csv");
+		ReadWriteOnFile.WriteReadFiles(folder, Constant.Full_Path_PageObject, "Csv");
+		//ReadWriteOnFile.WriteReadFiles(folder, Constant.Full_Path_PageObject, "Excel");
 		
 		System.out.println("+++++++++++++++++++ WRITE READ FILE - END ++++++++++++++++++");
 		
 		System.out.println("+++++++++++++++++++ READ PRINT - BEGIN ++++++++++++++++++");
 		
-		try {
+		/*try {
 			List<String> allLines = Files.readAllLines(Paths.get("/Users/willd/Downloads/CartPage.java"));
 			System.out.println(allLines.size());
 			String name[] = null;
@@ -111,12 +112,10 @@ public class JavaFile_to_XcelFile {
 		        .sorted()
 		        .map(String::toUpperCase)
 		        .forEach(System.out::println);
-		}
+		}*/
 		
 		
 		System.out.println("+++++++++++++++++++ READ PRINT - END ++++++++++++++++++");
-		
-		
 		
 		
 		

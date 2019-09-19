@@ -25,13 +25,18 @@ public class ExcelFileWriter implements FileWrite {
 	public boolean writeToFile(String fileName, List<String> dData) {
 		int i = 0;
 		try(XSSFWorkbook book = getWorkBook()) {
-			XSSFSheet sheet = book.createSheet(SHEET_NAME);
-			for (String model : dData) {
+			XSSFSheet sheet = book.createSheet(fileName); //SHEET_NAME
+			for (String data : dData) {
+				String[] str = data.toString().split(":");
+				
 				XSSFRow row = sheet.createRow(i++);
-			//	row.createCell(0).setCellValue(model.getLocatorType());
-			//	row.createCell(1).setCellValue(model.getLocatorValue());
+				row.createCell(0).setCellValue(str[0]);
+				row.createCell(1).setCellValue(str[1]);
+				row.createCell(2).setCellValue(str[2]);
+				row.createCell(3).setCellValue(str[3]);
 			}
-			book.write(new FileOutputStream(new File(ResourceHelper.getResourcePath("excel/") + fileName + ".xlsx")));
+			String filename[] = fileName.split(".java");
+			book.write(new FileOutputStream(new File(ResourceHelper.getResourcePath("excel/") + filename[0] + ".xlsx")));
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();

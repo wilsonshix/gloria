@@ -11,9 +11,6 @@ public class ObjectFactory {
 		case "Csv":
 			return new CsvFileWriter();
 			
-		case "Json":
-			return new JsonFileWrite();
-			
 		case "POM":
 			return new PageObjectGenerator();
 		}

@@ -4,23 +4,11 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
-import org.openqa.selenium.WebElement;
-
 import com.ivorytech.writer.ObjectFactory;
-import com.ivorytech.writer.CsvFileWriter;
-import com.ivorytech.writer.ExcelFileWriter;
-import com.ivorytech.writer.FileType;
 import com.ivorytech.writer.FileWrite;
-import com.ivorytech.writer.JsonFileWrite;
-import com.ivorytech.writer.LocatorModel;
-import com.ivorytech.writer.PageObjectGenerator;
-import com.opencsv.CSVWriter;
 
 
 
