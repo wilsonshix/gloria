@@ -110,6 +110,7 @@
     <artifactId>maven-surefire-plugin</artifactId>
     <version>2.22.2</version>
     <configuration>
+    <skipTests>true</skipTests>
     <suiteXmlFiles>
     <suiteXmlFile>C:\Users\willd\eclipse-workspace\Gloria\src\test\resources\testng.xml</suiteXmlFile>
     </suiteXmlFiles>
