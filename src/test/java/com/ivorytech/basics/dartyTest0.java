@@ -36,7 +36,7 @@ public class dartyTest0 {
 			System.setProperty("webdriver.gecko.driver","C:\\SeleniumGecko\\geckodriver.exe");
 			driver = new FirefoxDriver();
 		} else if(browser.contains("Chrome")){
-			System.setProperty("webdriver.chrome.driver","C:\\SeleniumGecko\\chromedriver.exe");
+			System.setProperty("webdriver.chrome.driver","C:\\SeleniumGecko\\chromedriver77.exe");
 			driver = new ChromeDriver();
 		}
     	
