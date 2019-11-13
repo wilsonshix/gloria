@@ -29,7 +29,7 @@ public class googlePageTest {
 			System.setProperty("webdriver.gecko.driver","C:\\SeleniumGecko\\geckodriver.exe");
 			driver = new FirefoxDriver();
 		} else if(browser.contains("Chrome")){
-			System.setProperty("webdriver.chrome.driver","C:\\SeleniumGecko\\chromedriver.exe");
+			System.setProperty("webdriver.chrome.driver","C:\\SeleniumGecko\\chromedriver78.exe");
 			driver = new ChromeDriver();
 		}
     }
@@ -46,10 +46,11 @@ public class googlePageTest {
 
         driver.get("http://www.google.com");
 
-        String search_text = "Google Search";
-        WebElement search_button = driver.findElement(By.name("btnK"));
+        String search_text = "Effectuez une recherche sur Google ou saisissez une URL";
+        WebElement search_Text = driver.findElement(By.id("fakebox"));
 
-        String text = search_button.getAttribute("value");
+        String text = search_Text.getText();
+        
 
         Assert.assertEquals(text, search_text, "Text not found!");
     }

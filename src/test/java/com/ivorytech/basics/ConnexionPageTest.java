@@ -40,7 +40,7 @@ public class ConnexionPageTest {
 			System.setProperty("webdriver.gecko.driver","C:\\SeleniumGecko\\geckodriver.exe");
 			driver = new FirefoxDriver();
 		} else if(browser.contains("Chrome")){
-			System.setProperty("webdriver.chrome.driver","C:\\SeleniumGecko\\chromedriver.exe");
+			System.setProperty("webdriver.chrome.driver","C:\\SeleniumGecko\\chromedriver78.exe");
 			driver = new ChromeDriver();
 		}
 	}
