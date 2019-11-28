@@ -2,28 +2,28 @@
 <testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Suite" duration-ms="60281" started-at="2019-11-13T10:14:31Z" finished-at="2019-11-13T10:15:31Z">
+  <suite name="Default suite" duration-ms="68583" started-at="2019-11-28T10:50:51Z" finished-at="2019-11-28T10:52:00Z">
     <groups>
     </groups>
-    <test name="Test" duration-ms="60281" started-at="2019-11-13T10:14:31Z" finished-at="2019-11-13T10:15:31Z">
-      <class name="com.ivorytech.basics.ConnexionPageTest">
-        <test-method status="PASS" signature="setBrowserConfig()[pri:0, instance:com.ivorytech.basics.ConnexionPageTest@146ba0ac]" name="setBrowserConfig" is-config="true" duration-ms="8958" started-at="2019-11-13T10:14:31Z" finished-at="2019-11-13T10:14:40Z">
+    <test name="Default test" duration-ms="68583" started-at="2019-11-28T10:50:51Z" finished-at="2019-11-28T10:52:00Z">
+      <class name="com.ivorytech.basics.dartyTest0">
+        <test-method status="PASS" signature="setBrowserConfig()[pri:0, instance:com.ivorytech.basics.dartyTest0@e25b2fe]" name="setBrowserConfig" is-config="true" duration-ms="33740" started-at="2019-11-28T10:50:51Z" finished-at="2019-11-28T10:51:25Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setBrowserConfig -->
-        <test-method status="PASS" signature="runTest()[pri:0, instance:com.ivorytech.basics.ConnexionPageTest@146ba0ac]" name="runTest" is-config="true" duration-ms="4238" started-at="2019-11-13T10:14:40Z" finished-at="2019-11-13T10:14:44Z">
+        <test-method status="PASS" signature="runTest()[pri:0, instance:com.ivorytech.basics.dartyTest0@e25b2fe]" name="runTest" is-config="true" duration-ms="28385" started-at="2019-11-28T10:51:25Z" finished-at="2019-11-28T10:51:53Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- runTest -->
-        <test-method status="PASS" signature="launchTest()[pri:0, instance:com.ivorytech.basics.ConnexionPageTest@146ba0ac]" name="launchTest" duration-ms="46831" started-at="2019-11-13T10:14:44Z" finished-at="2019-11-13T10:15:31Z">
+        <test-method status="PASS" signature="launchTest()[pri:0, instance:com.ivorytech.basics.dartyTest0@e25b2fe]" name="launchTest" duration-ms="6324" started-at="2019-11-28T10:51:53Z" finished-at="2019-11-28T10:52:00Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- launchTest -->
-        <test-method status="PASS" signature="closeTest()[pri:0, instance:com.ivorytech.basics.ConnexionPageTest@146ba0ac]" name="closeTest" is-config="true" duration-ms="0" started-at="2019-11-13T10:15:31Z" finished-at="2019-11-13T10:15:31Z">
+        <test-method status="PASS" signature="closeTest()[pri:0, instance:com.ivorytech.basics.dartyTest0@e25b2fe]" name="closeTest" is-config="true" duration-ms="1" started-at="2019-11-28T10:52:00Z" finished-at="2019-11-28T10:52:00Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- closeTest -->
-      </class> <!-- com.ivorytech.basics.ConnexionPageTest -->
-    </test> <!-- Test -->
-  </suite> <!-- Suite -->
+      </class> <!-- com.ivorytech.basics.dartyTest0 -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
 </testng-results>

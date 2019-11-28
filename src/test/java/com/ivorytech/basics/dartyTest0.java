@@ -11,16 +11,12 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import com.ivorytech.driverFactory.DriverManager;
-import com.ivorytech.pageFactory.CartPage;
-import com.ivorytech.pageFactory.CommonOnPage;
-import com.ivorytech.pageFactory.HomePage;
-import com.ivorytech.pageFactory.LoginPage;
-import com.ivorytech.pageFactory.ProductPage;
-import com.ivorytech.pageFactory.SearchPage;
-import com.ivorytech.pageFactory.UserDetailsPage;
+
+import com.ivorytech.driverFactory.*;
 
 
+
+@SuppressWarnings("unused")
 public class dartyTest0 {
 	
 	DriverManager driverManager;
@@ -63,10 +59,10 @@ public class dartyTest0 {
 
     @Test
     public void launchTest() {
-    	//driver.get(url);
+    	driver.get(url);
     	
     	 	
-    	HomePage hp = new HomePage(driver);
+ /*   	HomePage hp = new HomePage(driver);
     	Assert.assertTrue(hp.isAt());
     	//Assert.assertTrue(hp.isAt(driver,hp.lnk_Seconnecter,"HomePage"));
     	System.out.println("HomePage was successfully loaded :"+driver.getTitle());    	    	    	
@@ -111,7 +107,7 @@ public class dartyTest0 {
     	Assert.assertTrue(cp.isAt());
     	System.out.println("CartPage was successfully loaded :"+driver.getTitle());
     	
-    	    	
+    	    */	
     	    	
     }
  
