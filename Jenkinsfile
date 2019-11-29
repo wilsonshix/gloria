@@ -1,7 +1,7 @@
 node{
   stage('SCM Checkout'){
   
-  git 'https://github.com/wilsonshix/gloria.git','UsingJenkins'
+  git url: 'https://github.com/wilsonshix/gloria.git', branch:'UsingJenkins'
   }
   stage('Compile-Package'){
     // Get maven home path
