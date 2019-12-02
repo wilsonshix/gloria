@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="TestNGAllureReport">
+<listeners>
+        <listener class-name="TestNGAllureReport.Utils.Listeners.TestListener"/>
+        <listener class-name="TestNGAllureReport.Utils.Listeners.AnnotationTransformer"/>
+    </listeners>
+
+    <test name="LoginTest">
+        <classes>
+            <class name="TestNGAllureReport.LoginTests"/>
+        </classes>
+    </test>
+</suite>
