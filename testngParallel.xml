@@ -13,15 +13,6 @@
             </class>
         </classes>
     </test> <!-- First Test -->
-    <test name="com.SecondTest"  parallel="methods" thread-count="5">
-        <parameter name="browser" value="firefox"/>
-        <classes>
-            <class name="TestNGParall.SecondTest">
-                <methods>
-                    <include name="GOOGLE4" />
-                    <include name="YANDEX" />
-                </methods>
-            </class>
-        </classes>
-    </test> <!-- Second Test -->
+   
 </suite> <!-- Suite -->
+

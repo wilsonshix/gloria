@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite thread-count="2" guice-stage="DEVELOPMENT" name="Failed suite [Suite]" parallel="tests">
+  <test thread-count="2" name="com.FirstTest(failed)" parallel="methods">
+    <parameter name="browser" value="chrome"/>
+    <classes>
+      <class name="TestNGParallel.FirstTest">
+        <methods>
+          <include name="GOOGLE3"/>
+          <include name="tearDown"/>
+          <include name="setup"/>
+          <include name="GOOGLE1"/>
+          <include name="terminate"/>
+          <include name="GOOGLE2"/>
+        </methods>
+      </class> <!-- TestNGParallel.FirstTest -->
+    </classes>
+  </test> <!-- com.FirstTest(failed) -->
+</suite> <!-- Failed suite [Suite] -->
