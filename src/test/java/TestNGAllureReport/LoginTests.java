@@ -1,5 +1,6 @@
 package TestNGAllureReport;
 
+import org.testng.annotations.Test;
 import io.qameta.allure.*;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;

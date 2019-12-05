@@ -27,10 +27,8 @@ public static void main(String[] args) {
 		caps.setCapability("browserName", "Chrome");
 		caps.setCapability("noReset", true);
 		caps.setCapability(MobileCapabilityType.PLATFORM_NAME, MobilePlatform.ANDROID);
-		
-		//Set ChromeDriver location
-		//System.setProperty("webdriver.chrome.driver","C:\\SeleniumGecko\\chromedriver2.44.exe");
-		
+		caps.setCapability("chromedriverExecutable","C:\\SeleniumGecko\\chromedriver78.exe");  //Set ChromeDriver location
+	
 		//Instantiate Appium Driver
 		AppiumDriver<MobileElement> driver = null;
 		try {
@@ -43,19 +41,7 @@ public static void main(String[] args) {
 		//Open URL in Chrome Browser
 		driver.get("https://www.google.com/");
 		
-		
-	    /*
-    	DesiredCapabilities  capabilities = new DesiredCapabilities();
-    	capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
-    	capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "9");
-    	capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Android");
-    	capabilities.setCapability("udid", "8f81d4e2");
-    	capabilities.setCapability(MobileCapabilityType.BROWSER_NAME, "Chrome");
-    	ChromeOptions options=new ChromeOptions();
-    	options.setExperimentalOption("androidPackage", "com.android.chrome");
-    	capabilities.setCapability(ChromeOptions.CAPABILITY, options);
-    	WebDriver driver = new RemoteWebDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
-    	driver.get("http://www.yahoo.com");  */
+
 		
 		
 		

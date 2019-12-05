@@ -3,6 +3,7 @@ package TestNGAllureReport.Utils.Listeners;
 import com.relevantcodes.extentreports.LogStatus;
 
 import TestNGAllureReport.BaseTest;
+import TestNGAllureReport.Log;
 import TestNGAllureReport.Utils.ExtentReports.ExtentManager;
 import TestNGAllureReport.Utils.ExtentReports.ExtentTestManager;
 import io.qameta.allure.Attachment;

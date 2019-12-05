@@ -50,7 +50,8 @@ public class ThirdAppiumTest {
 	    caps.setCapability("browserName", "Chrome");
 	    caps.setCapability("noReset", true);
 	    caps.setCapability("unicodekeyboard", true);
-	    caps.setCapability(MobileCapabilityType.PLATFORM_NAME, MobilePlatform.ANDROID);		
+	    caps.setCapability(MobileCapabilityType.PLATFORM_NAME, MobilePlatform.ANDROID);	
+	    caps.setCapability("chromedriverExecutable","C:\\SeleniumGecko\\chromedriver78.exe");  //Set ChromeDriver location
 	}
 	
 	
@@ -89,19 +90,7 @@ public class ThirdAppiumTest {
     	
     	driver.findElement(By.xpath("//*[@id = 'btn-search']")).sendKeys(search);
     	
-    	
-    	
-    	/*	hp.goToLoginPage();
-    	
-    	LoginPage lp = new LoginPage(driver); 
-    	//Assert.assertTrue(lp.isAt());
-    	System.out.println("LoginPage was successfully loaded :"+driver.getTitle());
-    	lp.Saisir(driver, lp.txt_username, "willdjako05@gmail.com");
-    	lp.Saisir(driver, lp.txt_password, "Alexandrine1");
-    	lp.Cliquer(driver, lp.btn_Connexion);
-    	
-*/
-
+   
 	}
 	
 	}

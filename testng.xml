@@ -1,19 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="TestngAllureReport.xml">
-  <test thread-count="5" name="Test">
+<suite name="SuiteAllure">
+  <test thread-count="5" name="TestAllure">
     <classes>
-      <class name="com.ivorytech.basics.ThirdAppiumTest"/>
-      <class name="com.ivorytech.basics.TestLog4j"/>
       <class name="TestNGAllureReport.LoginTests"/>
-      <class name="com.ivorytech.basics.googlePageTest"/>
-      <class name="com.ivorytech.basics.demo"/>
-      <class name="com.ivorytech.basics.isAtTest"/>
-      <class name="TestNGParallel.FirstTest"/>
-      <class name="com.ivorytech.basics.dartyTest0"/>
-      <class name="TestNGParallel.BaseTest"/>
-      <class name="com.ivorytech.basics.DriverTest"/>
-      <class name="TestNGParallel.SecondTest"/>
     </classes>
-  </test> <!-- Test -->
-</suite> <!-- TestngAllureReport.xml -->
+  </test> <!-- TestAllure -->
+</suite> <!-- SuiteAllure -->

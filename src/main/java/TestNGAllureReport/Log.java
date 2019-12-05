@@ -3,6 +3,10 @@ package TestNGAllureReport;
 import org.apache.log4j.Logger;
 
 public class Log {
+	
+	//Gloria/src/main/java/TestNGAllureReport/log4j.properties
+	String log4jConfPath = "/Gloria/src/main/java/TestNGAllureReport/log4j.properties";
+	
     //Initialize Log4j instance
     private static Logger Log = Logger.getLogger(Log.class.getName());
 
@@ -41,4 +45,4 @@ public class Log {
         Log.debug(message);
     }
 }
-© 2019 GitHub, Inc.
+//© 2019 GitHub, Inc.
