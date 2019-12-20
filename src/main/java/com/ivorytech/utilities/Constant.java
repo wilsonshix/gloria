@@ -1,4 +1,4 @@
-package com.ivorytech.utility;
+package com.ivorytech.utilities;
 
 public class Constant {
 	

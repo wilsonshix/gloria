@@ -38,8 +38,7 @@ public class dartyTest0 {
 		} else if(browser.contains("Chrome")){
 			System.setProperty("webdriver.chrome.driver","C:\\SeleniumGecko\\chromedriver.exe");
 			driver = new ChromeDriver();
-		}
-    	
+		}    	
     	
 	}
 

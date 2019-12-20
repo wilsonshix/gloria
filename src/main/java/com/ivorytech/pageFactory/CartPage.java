@@ -8,7 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.ivorytech.utility.WebElementAction;
+import com.ivorytech.utilities.WebElementAction;
 
 public class CartPage extends CommonOnPage implements WebElementAction{
 	
@@ -24,7 +24,7 @@ public class CartPage extends CommonOnPage implements WebElementAction{
 	
 	
 	/*
-	 * @Entêtes
+	 * @Entï¿½tes
 	 */
 	
 	
@@ -32,7 +32,7 @@ public class CartPage extends CommonOnPage implements WebElementAction{
 	 * @Corps
 	 */
 	
-	//Message Mon panier affiché
+	//Message Mon panier affichï¿½
 	@FindBy(xpath="//*[@id='basket_title']")
 	WebElement msg_MyBasket;
 
@@ -44,7 +44,7 @@ public class CartPage extends CommonOnPage implements WebElementAction{
 	//<button type="submit" class="btn btn-secondary btn-large btn-basket-submit">Commander</button>
 	WebElement btn_Command;
 
-	// Vérifier que l'élément est cliquable => page is loaded !
+	// Vï¿½rifier que l'ï¿½lï¿½ment est cliquable => page is loaded !
 		public boolean isAt() {    
 	    	
 	        boolean isClickable = WaitForWebElement(driver, btn_Command);

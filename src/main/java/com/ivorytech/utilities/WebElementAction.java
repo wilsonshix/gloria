@@ -1,4 +1,4 @@
-package com.ivorytech.utility;
+package com.ivorytech.utilities;
 
 import static org.testng.Assert.assertEquals;
 

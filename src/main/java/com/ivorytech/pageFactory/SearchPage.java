@@ -23,7 +23,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import com.ivorytech.utility.WebElementAction;
+import com.ivorytech.utilities.WebElementAction;
 
 public class SearchPage extends CommonOnPage implements WebElementAction{
 

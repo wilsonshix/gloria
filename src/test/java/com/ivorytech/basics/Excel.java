@@ -1,7 +1,7 @@
 package com.ivorytech.basics;
 
-import com.ivorytech.utility.Constant;
-import com.ivorytech.utility.ExcelUtils;
+import com.ivorytech.utilities.Constant;
+import com.ivorytech.utilities.ExcelUtils;
 
 public class Excel {
 

@@ -9,7 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
-import com.ivorytech.utility.WebElementAction;
+import com.ivorytech.utilities.WebElementAction;
 
 
 //Liaisons entre les pages : Entêtes, Menus, Pieds de page

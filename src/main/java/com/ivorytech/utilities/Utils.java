@@ -1,4 +1,4 @@
-package com.ivorytech.utility;
+package com.ivorytech.utilities;
 
 import java.util.Random;
 
@@ -10,12 +10,12 @@ public class Utils {
 
 		boolean bool = false;
 		int i = 0;
-		while (bool == false && i < 2) { //repète 2 fois
+		while (bool == false && i < 2) { //repï¿½te 2 fois
 			bool = actionOnWebElement;
 			i++;
 			System.out.println(i);
 			if(bool == false && i==3) {
-				System.out.println("On n'a pas pu relancer la machine à click :)");
+				System.out.println("On n'a pas pu relancer la machine ï¿½ click :)");
 			}
 		}        
 		

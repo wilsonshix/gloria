@@ -1,4 +1,4 @@
-package com.ivorytech.utility;
+package com.ivorytech.utilities;
 
 import java.util.concurrent.TimeUnit;
 

@@ -8,9 +8,9 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import com.ivorytech.utility.Constant;
-import com.ivorytech.utility.ExcelUtils;
 import com.ivorytech.pageFactory.*;
+import com.ivorytech.utilities.Constant;
+import com.ivorytech.utilities.ExcelUtils;
 
 
 public class dartyTestExcel {
