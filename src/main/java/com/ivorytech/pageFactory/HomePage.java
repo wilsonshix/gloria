@@ -1,6 +1,9 @@
 package com.ivorytech.pageFactory;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.CacheLookup;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import com.ivorytech.utilities.WebElementAction;
 
@@ -21,6 +24,15 @@ public class HomePage extends CommonOnPage implements WebElementAction {
 	String baseURL = "https://www.darty.com/";
 
 	/** Web Elements */
+	//Google page example
+	
+	@FindBy(xpath="//*[@id=\"fakebox-input\"]") 
+	@CacheLookup 
+	public WebElement txt_searchBar; 
+	
+	@FindBy(xpath="//*[@id=\"tsf\"]/div[2]/div[1]/div[2]/button") 
+	@CacheLookup 
+	public WebElement btn_search; 
 	
 
 	/** Page Methods */
@@ -48,6 +60,7 @@ public class HomePage extends CommonOnPage implements WebElementAction {
     	performingClickOnWebElement(driver, lnk_PageConnexion);
         return new LoginPage(driver);
     }
+    
     
 
 	// Vérifier qu'on est bien sur la page

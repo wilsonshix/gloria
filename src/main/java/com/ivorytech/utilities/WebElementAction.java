@@ -20,6 +20,8 @@ import org.testng.Assert;
 
 import com.ivorytech.pageFactory.LoginPage;
 
+import io.qameta.allure.Step;
+
 public interface WebElementAction {
 
 /*
@@ -32,6 +34,7 @@ public interface WebElementAction {
 */
 
 	// #1  Renseigner une valeur dans un objet
+	@Step("Enter in WebElement: {1} value: {2} ...")
 	public default void Saisir(WebDriver driver, WebElement e, String a){
 		System.out.println("Renseigner -- "+ e.getTagName()+" avec la valeur -- "+a.toString());
 		performingSendKeysOnWebElement(driver, e, a.trim());		
@@ -39,6 +42,7 @@ public interface WebElementAction {
 
 
 	// #2  Cliquer sur un objet
+	@Step("Execute method: {method} ...")
 	public default void Cliquer(WebDriver driver, WebElement e){
 		System.out.println("Cliquer sur -- "+ e.getTagName());
 		performingClickOnWebElement(driver, e);		
@@ -60,13 +64,20 @@ public interface WebElementAction {
 
 
 	
-	// #4 Atteindre une page
+	// #4 Atteindre une page	
 	public default void AtteindrePage(WebDriver driver, WebElement e){ 
 		System.out.println("Accéder à la page ");
 		performingClickOnWebElement(driver, e);
 	}
 	
 	
+
+	// #5 Charger une URL
+	@Step("Go to url: {1} ...")
+	public default void GoToURL(WebDriver driver, String url){ 
+		System.out.println("Accéder à la page ");
+		driver.get(url);
+	}
 
 	
 	

@@ -39,6 +39,14 @@ public class LoginPage extends CommonOnPage implements WebElementAction{
 
 	
 
+    // Se connecter
+    @Step("Login Step with username: {0}, password: {1}, for method: {method} ...")
+    public LoginPage connexion(String login, String pwd) {
+    	Saisir(driver, txt_username, login);
+    	Saisir(driver, txt_password, pwd);
+    	performingClickOnWebElement(driver, btn_Connexion);
+		return this;    	
+    }
 	
 
 	// Créer un macther pour tous les noms des pages
