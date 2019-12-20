@@ -46,7 +46,7 @@ public class AllureReportingTest extends SeleniumBaseTests{
     
     
 
-    @Test (priority = 0, description="Valid Login Scenario with good username and password.")
+  /*  @Test (priority = 0, description="Valid Login Scenario with good username and password.")
     @Severity(SeverityLevel.BLOCKER)
     @Description("Test Description: Login test with good username and good password.")
     @Story("Valid username and password login test")
@@ -75,7 +75,7 @@ public class AllureReportingTest extends SeleniumBaseTests{
         
     }
 	
-	
+	*/
 	
 
 }
