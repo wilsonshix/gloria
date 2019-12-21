@@ -3,13 +3,12 @@ package com.ivorytech.baseTests;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 
-import com.ivorytech.pageFactory.*;
+import com.ivorytech.pageFactory.webBrowserApplication.*;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
@@ -20,11 +19,11 @@ import io.appium.java_client.remote.MobilePlatform;
 
 public class AppiumBaseTests {
 	
-	public WebDriver driver;
-    public HomePage homePage;
-    public LoginPage loginPage;
+	public AppiumDriver driver;
+    public GooglePage googlePage;
+	
 
-    public WebDriver getDriver() {
+    public AppiumDriver getDriver() {
         return driver;
     }
 
@@ -47,9 +46,9 @@ public class AppiumBaseTests {
     			//System.setProperty("webdriver.chrome.driver","C:\\SeleniumGecko\\chromedriver2.44.exe");
     			
     			//Instantiate Appium Driver
-    			AppiumDriver<MobileElement> driver = null;
+    			AppiumDriver driver = null;
     			try {
-    				driver = new AndroidDriver<MobileElement>(new URL("http://localhost:4723/wd/hub"), caps);
+    				driver = new AppiumDriver(new URL("http://localhost:4723/wd/hub"), caps);
     				
     			} catch (MalformedURLException e) {
     				System.out.println(e.getMessage());
@@ -61,8 +60,7 @@ public class AppiumBaseTests {
 
     @BeforeMethod
     public void methodLevelSetup() {
-        homePage = new HomePage(driver);
-        loginPage = new LoginPage(driver);
+        googlePage = new GooglePage(driver);
     }
 
     @AfterClass

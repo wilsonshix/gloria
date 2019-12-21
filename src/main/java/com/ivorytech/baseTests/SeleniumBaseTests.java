@@ -5,8 +5,12 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
+
+import com.ivorytech.pageFactory.webBrowserApplication.*;
+
+import io.appium.java_client.AppiumDriver;
+
 import org.testng.annotations.*;
-import com.ivorytech.pageFactory.*;
 
 
 public class SeleniumBaseTests {
@@ -16,8 +20,8 @@ public class SeleniumBaseTests {
     public HomePage homePage;
     public LoginPage loginPage;
 
-    public WebDriver getDriver() {
-        return driver;
+    public AppiumDriver getDriver() {
+        return (AppiumDriver) driver;
     }
 
     @BeforeClass

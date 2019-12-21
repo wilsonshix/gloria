@@ -18,7 +18,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import com.ivorytech.pageFactory.LoginPage;
+import com.ivorytech.pageFactory.webBrowserApplication.LoginPage;
 
 import io.qameta.allure.Step;
 
