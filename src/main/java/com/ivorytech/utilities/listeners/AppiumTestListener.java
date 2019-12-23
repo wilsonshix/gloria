@@ -17,7 +17,7 @@ import org.testng.ITestResult;
 
 public class AppiumTestListener extends AppiumBaseTests implements ITestListener {
 
-    private static String getTestMethodName(ITestResult iTestResult) {
+	private static String getTestMethodName(ITestResult iTestResult) {
         return iTestResult.getMethod().getConstructorOrMethod().getName();
     }
 
@@ -42,7 +42,7 @@ public class AppiumTestListener extends AppiumBaseTests implements ITestListener
     @Override
     public void onStart(ITestContext iTestContext) {
         System.out.println("I am in onStart method " + iTestContext.getName());
-        iTestContext.setAttribute("WebDriver", this.driver);
+        iTestContext.setAttribute("AppiumDriver", this.driver); //AndroidDriver
     }
 
     @Override
@@ -86,12 +86,12 @@ public class AppiumTestListener extends AppiumBaseTests implements ITestListener
         saveTextLog(getTestMethodName(iTestResult) + " failed and screenshot taken!");
 
         //Take base64Screenshot screenshot for extent reports
-      //  String base64Screenshot = "data:image/png;base64,"+((TakesScreenshot)driver).
-        	//	getScreenshotAs(OutputType.BASE64);
+        String base64Screenshot = "data:image/png;base64,"+((TakesScreenshot)driver).
+                getScreenshotAs(OutputType.BASE64);
 
         //Extentreports log and screenshot operations for failed tests.
-      //  ExtentTestManager.getTest().log(LogStatus.FAIL,"Test Failed",
-              //  ExtentTestManager.getTest().addBase64ScreenShot(base64Screenshot));
+        ExtentTestManager.getTest().log(LogStatus.FAIL,"Test Failed",
+                ExtentTestManager.getTest().addBase64ScreenShot(base64Screenshot));
     }
 
     @Override

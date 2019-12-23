@@ -3,6 +3,8 @@ package com.ivorytech.baseTests;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -19,11 +21,15 @@ import io.appium.java_client.remote.MobilePlatform;
 
 public class AppiumBaseTests {
 	
-	public AppiumDriver driver;
+	public AppiumDriver driver; //or AndroidDriver
+	DesiredCapabilities caps;
     public GooglePage googlePage;
+    public HomePage homePage;
+    
+    String appium_node = "http://0.0.0.0:4723/wd/hub";
 	
 
-    public AppiumDriver getDriver() {
+    public AppiumDriver getDriver() { // or AndroidDriver
         return driver;
     }
 
@@ -33,7 +39,7 @@ public class AppiumBaseTests {
     	
     	// appium
     	//Set the Desired Capabilities
-		 		DesiredCapabilities caps = new DesiredCapabilities();
+		 		caps = new DesiredCapabilities();
     			caps.setCapability("deviceName", "My Phone");
     			caps.setCapability("udid", "8f81d4e2"); //Give Device ID of your mobile phone
     			caps.setCapability("platformName", "Android");
@@ -41,14 +47,12 @@ public class AppiumBaseTests {
     			caps.setCapability("browserName", "Chrome");
     			caps.setCapability("noReset", true);
     			caps.setCapability(MobileCapabilityType.PLATFORM_NAME, MobilePlatform.ANDROID);
+    			caps.setCapability("chromedriverExecutable", "C:\\SeleniumGecko\\chromedriver78.exe"); // Set ChromeDriver location
     			
-    			//Set ChromeDriver location
-    			//System.setProperty("webdriver.chrome.driver","C:\\SeleniumGecko\\chromedriver2.44.exe");
-    			
-    			//Instantiate Appium Driver
-    			AppiumDriver driver = null;
+
+    			//Instantiate Appium Driver or AndroidDriver
     			try {
-    				driver = new AppiumDriver(new URL("http://localhost:4723/wd/hub"), caps);
+    				driver = new AppiumDriver<>(new URL(appium_node), caps);
     				
     			} catch (MalformedURLException e) {
     				System.out.println(e.getMessage());
@@ -61,11 +65,12 @@ public class AppiumBaseTests {
     @BeforeMethod
     public void methodLevelSetup() {
         googlePage = new GooglePage(driver);
+        homePage = new HomePage(driver);
     }
 
     @AfterClass
     public void teardown() {
-        driver.quit();
+       // driver.quit();
     }
 
 }

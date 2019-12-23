@@ -1,19 +1,14 @@
 package com.ivorytech.test.webBrowserApplication;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import com.ivorytech.baseTests.SeleniumBaseTests;
-import com.ivorytech.pageFactory.webBrowserApplication.HomePage;
-
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
-import io.qameta.allure.Step;
 import io.qameta.allure.Story;
 
 

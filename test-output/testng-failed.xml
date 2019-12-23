@@ -1,22 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite guice-stage="DEVELOPMENT" name="Failed suite [Suite]">
-  <listeners>
-    <listener class-name="com.ivorytech.utilities.listeners.TestListener"/>
-    <listener class-name="com.ivorytech.utilities.listeners.AnnotationTransformer"/>
-  </listeners>
-  <test thread-count="5" name="AllureReportingTest(failed)">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
+  <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.ivorytech.basics.AllureReportingTest">
+      <class name="com.ivorytech.test.mobileApplication.AppiumTest_Two">
         <methods>
-          <include name="teardown"/>
-          <include name="FirstSearchOnGoogle"/>
+          <include name="goToHomePage"/>
           <include name="methodLevelSetup"/>
           <include name="classLevelSetup"/>
-          <include name="ValidLoginTest_ValidUserNameValidPassword"/>
-          <include name="invalidLoginTest_InvalidUserNameInvalidPassword"/>
+          <include name="teardown"/>
         </methods>
-      </class> <!-- com.ivorytech.basics.AllureReportingTest -->
+      </class> <!-- com.ivorytech.test.mobileApplication.AppiumTest_Two -->
     </classes>
-  </test> <!-- AllureReportingTest(failed) -->
-</suite> <!-- Failed suite [Suite] -->
+  </test> <!-- Default test(failed) -->
+</suite> <!-- Failed suite [Default suite] -->

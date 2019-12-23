@@ -15,7 +15,7 @@ public class GooglePage implements WebElementAction {
 	WebDriver driver;
 
 	/** Constructor */
-	public GooglePage(AppiumDriver driver) {
+	public GooglePage(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
 	}

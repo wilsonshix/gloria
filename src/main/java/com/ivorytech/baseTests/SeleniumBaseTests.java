@@ -20,8 +20,8 @@ public class SeleniumBaseTests {
     public HomePage homePage;
     public LoginPage loginPage;
 
-    public AppiumDriver getDriver() {
-        return (AppiumDriver) driver;
+    public WebDriver getDriver() {
+        return driver;
     }
 
     @BeforeClass
